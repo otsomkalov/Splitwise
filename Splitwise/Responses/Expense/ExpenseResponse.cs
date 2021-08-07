@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Splitwise.Models;
 using Splitwise.Requests.Expense;
 
 namespace Splitwise.Responses.Expense
@@ -47,17 +46,17 @@ namespace Splitwise.Responses.Expense
 
         public DateTimeOffset CreatedAt { get; set; }
 
-        public Category CreatedBy { get; set; }
+        public Category.Category CreatedBy { get; set; }
 
         public DateTimeOffset UpdatedAt { get; set; }
 
-        public Category UpdatedBy { get; set; }
+        public Category.Category UpdatedBy { get; set; }
 
         public DateTimeOffset DeletedAt { get; set; }
 
-        public Category DeletedBy { get; set; }
+        public Category.Category DeletedBy { get; set; }
 
-        public Category Category { get; set; }
+        public Category.Category Category { get; set; }
 
         public Receipt Receipt { get; set; }
 
