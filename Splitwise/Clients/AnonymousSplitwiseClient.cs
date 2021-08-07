@@ -11,14 +11,13 @@ namespace Splitwise.Clients
 
         protected readonly IRestClient RestClient;
 
-        public ICurrencyClient Currency { get; }
-
         public AnonymousSplitwiseClient()
         {
             RestClient = new RestClient(SplitwiseUrl)
                 .UseNewtonsoftJson(JsonOptions.JsonSerializerSettings);
 
             Currency = new CurrencyClient(RestClient);
+            Category = new CategoryClient(RestClient);
         }
 
         protected AnonymousSplitwiseClient(string apiKey) : this()
@@ -26,5 +25,9 @@ namespace Splitwise.Clients
             RestClient = RestClient
                 .AddDefaultHeader("Authorization", $"Bearer {apiKey}");
         }
+
+        public ICurrencyClient Currency { get; }
+
+        public ICategoryClient Category { get; }
     }
 }

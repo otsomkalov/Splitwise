@@ -6,9 +6,9 @@ Splitwise API wrapper library for .NET
 
 Implemented:
 - [x] Currency
-- [] Category
-- [] User
-- [] Group
-- [] Expense
-- [] Comment
-- [] Notification
+- [x] Category
+- [ ] User
+- [ ] Group
+- [ ] Expense
+- [ ] Comment
+- [ ] Notification
