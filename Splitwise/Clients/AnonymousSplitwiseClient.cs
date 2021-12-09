@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using System;
+using RestSharp;
 using RestSharp.Serializers.NewtonsoftJson;
 using Splitwise.Clients.Interfaces;
 using Splitwise.Options;
@@ -18,10 +19,16 @@ namespace Splitwise.Clients
 
             Currency = new CurrencyClient(RestClient);
             Category = new CategoryClient(RestClient);
+            User = new UserClient(RestClient);
         }
 
         protected AnonymousSplitwiseClient(string apiKey) : this()
         {
+            if (string.IsNullOrEmpty(apiKey))
+            {
+                throw new ArgumentNullException(nameof(apiKey), "Api key is null or empty");
+            }
+
             RestClient = RestClient
                 .AddDefaultHeader("Authorization", $"Bearer {apiKey}");
         }
@@ -29,5 +36,7 @@ namespace Splitwise.Clients
         public ICurrencyClient Currency { get; }
 
         public ICategoryClient Category { get; }
+
+        public IUserClient User { get; }
     }
 }
