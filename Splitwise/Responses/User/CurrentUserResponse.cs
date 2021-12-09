@@ -3,10 +3,8 @@ using Splitwise.Responses.Shared;
 
 namespace Splitwise.Responses.User
 {
-    public class UserResponse : BasePersonResponse
+    public class CurrentUserResponse : BasePersonResponse
     {
-        public bool CustomPicture { get; set; }
-
         public string ForceRefreshAt { get; set; }
 
         public string Locale { get; set; }

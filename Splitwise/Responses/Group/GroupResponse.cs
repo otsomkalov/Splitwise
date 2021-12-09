@@ -17,7 +17,7 @@ namespace Splitwise.Responses.Group
 
         public bool SimplifyByDefault { get; set; }
 
-        public IReadOnlyCollection<UserResponse> Members { get; set; }
+        public IReadOnlyCollection<CurrentUserResponse> Members { get; set; }
 
         public PictureResponse Avatar { get; set; }
 

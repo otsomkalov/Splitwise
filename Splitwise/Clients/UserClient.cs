@@ -2,38 +2,46 @@
 using RestSharp;
 using Splitwise.Clients.Interfaces;
 using Splitwise.Requests.User;
+using Splitwise.Responses.Shared;
 using Splitwise.Responses.User;
 
 namespace Splitwise.Clients
 {
-    public class UserClient : BaseClient, IUserClient
+    internal class UserClient : IUserClient
     {
-        public UserClient(string apiKey) : base(apiKey)
+        private readonly IRestClient _restClient;
+
+        public UserClient(IRestClient restClient)
         {
+            _restClient = restClient;
         }
 
-        public Task<UserResponse> GetCurrentAsync()
+        public async Task<CurrentUserResponse> GetCurrentAsync()
         {
             var restRequest = new RestRequest("get_current_user");
 
-            return RestClient.GetAsync<UserResponse>(restRequest);
+            var getUserResponse = await _restClient.GetAsync<GetUserResponse<CurrentUserResponse>>(restRequest);
+
+            return getUserResponse.User;
         }
 
-        public Task<UserResponse> GetAsync(int id)
+        public async Task<BasePersonResponse> GetAsync(int id)
         {
             var restRequest = new RestRequest("get_user/{id}")
                 .AddUrlSegment("id", id);
 
-            return RestClient.GetAsync<UserResponse>(restRequest);
+            var getUserResponse = await _restClient.GetAsync<GetUserResponse<BasePersonResponse>>(restRequest);
+
+            return getUserResponse.User;
         }
 
-        public Task<UserResponse> UpdateAsync(int id, UpdateUserRequest request)
+        public Task<CurrentUserResponse> UpdateAsync(int id, UpdateUserRequest request)
         {
             var restRequest = new RestRequest("update_user/{id}")
                 .AddUrlSegment("id", id)
                 .AddJsonBody(request);
 
-            return RestClient.PostAsync<UserResponse>(restRequest);
+            return _restClient.PostAsync<CurrentUserResponse>(restRequest);
         }
     }
 }

@@ -1,7 +1,7 @@
-namespace Splitwise.Responses.User
+﻿namespace Splitwise.Responses.User
 {
-    public class GetUserResponse
+    public class GetUserResponse<T>
     {
-        
+        public T User { get; set; }
     }
 }

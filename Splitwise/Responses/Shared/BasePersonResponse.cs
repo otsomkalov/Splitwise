@@ -9,7 +9,9 @@ namespace Splitwise.Responses.Shared
         public string LastName { get; set; }
 
         public PictureResponse Picture { get; set; }
-        
+
+        public bool CustomPicture { get; set; }
+
         public string Email { get; set; }
 
         public string RegistrationStatus { get; set; }

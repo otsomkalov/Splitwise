@@ -1,15 +1,16 @@
 using System.Threading.Tasks;
 using Splitwise.Requests.User;
+using Splitwise.Responses.Shared;
 using Splitwise.Responses.User;
 
 namespace Splitwise.Clients.Interfaces
 {
     public interface IUserClient
     {
-        Task<UserResponse> GetCurrentAsync();
+        Task<CurrentUserResponse> GetCurrentAsync();
 
-        Task<UserResponse> GetAsync(int id);
+        Task<BasePersonResponse> GetAsync(int id);
 
-        Task<UserResponse> UpdateAsync(int id, UpdateUserRequest request);
+        Task<CurrentUserResponse> UpdateAsync(int id, UpdateUserRequest request);
     }
 }
