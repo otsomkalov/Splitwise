@@ -1,6 +1,8 @@
+using System.Collections.Generic;
+
 namespace Splitwise.Responses.Friend
 {
-    public class AddFriendsResponse
-    {
-    }
+    public record AddFriendsResponse (
+        ICollection<Friend> Users
+    );
 }

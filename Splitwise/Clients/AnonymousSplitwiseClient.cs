@@ -19,7 +19,7 @@ namespace Splitwise.Clients
 
             Currency = new CurrencyClient(RestClient);
             Category = new CategoryClient(RestClient);
-            User = new UserClient(RestClient);
+            Auth = new AuthClient(RestClient);
         }
 
         protected AnonymousSplitwiseClient(string apiKey) : this()
@@ -37,6 +37,6 @@ namespace Splitwise.Clients
 
         public ICategoryClient Category { get; }
 
-        public IUserClient User { get; }
+        public IAuthClient Auth { get; }
     }
 }

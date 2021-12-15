@@ -1,7 +1,4 @@
-using System;
 using RestSharp;
-using RestSharp.Serializers.NewtonsoftJson;
-using Splitwise.Options;
 
 namespace Splitwise.Clients
 {

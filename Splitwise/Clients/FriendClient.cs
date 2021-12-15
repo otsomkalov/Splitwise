@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using RestSharp;
 using Splitwise.Clients.Interfaces;
@@ -8,38 +8,51 @@ using Splitwise.Responses.Friend;
 
 namespace Splitwise.Clients
 {
-    public class FriendClient : BaseClient, IFriendClient
+    public class FriendClient : IFriendClient
     {
-        protected FriendClient(string apiKey) : base(apiKey)
+        private readonly IRestClient _restClient;
+
+        public FriendClient(IRestClient restClient)
         {
+            _restClient = restClient;
         }
 
-        public Task<ListFriendsResponse> ListAsync()
+        public async Task<ICollection<Friend>> ListAsync()
         {
             var restRequest = new RestRequest("get_friends");
 
-            return RestClient.GetAsync<ListFriendsResponse>(restRequest);
+            var listFriendsResponse = await _restClient.GetAsync<ListFriendsResponse>(restRequest);
+
+            return listFriendsResponse.Friends;
         }
 
-        public Task<GetFriendResponse> GetAsync(int id)
+        public async Task<Friend> GetAsync(int id)
         {
             var restRequest = new RestRequest("get_friend/{id}")
                 .AddUrlSegment("id", id);
 
-            return RestClient.GetAsync<GetFriendResponse>(restRequest);
+            var getFriendResponse = await _restClient.GetAsync<GetFriendResponse>(restRequest);
+
+            return getFriendResponse.Friend;
         }
 
-        public Task<GetFriendResponse> AddAsync(AddFriendRequest request)
+        public async Task<Friend> AddAsync(AddFriendRequest request)
         {
             var restRequest = new RestRequest("create_friend")
                 .AddJsonBody(request);
 
-            return RestClient.PostAsync<GetFriendResponse>(restRequest);
+            var getFriendResponse = await _restClient.PostAsync<GetFriendResponse>(restRequest);
+
+            return getFriendResponse.Friend;
         }
 
-        public Task<AddFriendsResponse> AddAsync(AddFriendsRequest request)
+        public async Task<ICollection<Friend>> AddAsync(AddFriendsRequest request)
         {
-            throw new NotImplementedException();
+            var restRequest = new RestRequest("create_friends");
+
+            var addFriendsResponse = await _restClient.PostAsync<AddFriendsResponse>(restRequest);
+
+            return addFriendsResponse.Users;
         }
 
         public Task<DeleteFriendshipResponse> DeleteAsync(int id)
@@ -47,7 +60,7 @@ namespace Splitwise.Clients
             var restRequest = new RestRequest("delete_friend/{id}")
                 .AddUrlSegment("id", id);
 
-            return RestClient.PostAsync<DeleteFriendshipResponse>(restRequest);
+            return _restClient.PostAsync<DeleteFriendshipResponse>(restRequest);
         }
     }
 }

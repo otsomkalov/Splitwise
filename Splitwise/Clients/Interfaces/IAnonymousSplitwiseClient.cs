@@ -5,5 +5,7 @@
         ICurrencyClient Currency { get; }
 
         ICategoryClient Category { get; }
+
+        IAuthClient Auth { get; }
     }
 }

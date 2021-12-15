@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Splitwise.Requests.Friend;
 using Splitwise.Responses;
@@ -7,13 +8,13 @@ namespace Splitwise.Clients.Interfaces
 {
     public interface IFriendClient
     {
-        Task<ListFriendsResponse> ListAsync();
+        Task<ICollection<Friend>> ListAsync();
 
-        Task<GetFriendResponse> GetAsync(int id);
+        Task<Friend> GetAsync(int id);
 
-        Task<GetFriendResponse> AddAsync(AddFriendRequest request);
+        Task<Friend> AddAsync(AddFriendRequest request);
 
-        Task<AddFriendsResponse> AddAsync(AddFriendsRequest request);
+        Task<ICollection<Friend>> AddAsync(AddFriendsRequest request);
 
         Task<DeleteFriendshipResponse> DeleteAsync(int id);
     }

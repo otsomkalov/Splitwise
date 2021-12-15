@@ -1,9 +1,8 @@
 namespace Splitwise.Responses.Friend
 {
-    public class BalanceResponse
-    {
-        public string CurrencyCode { get; set; }
-
-        public string Amount { get; set; }
-    }
+    public record BalanceResponse
+    (
+        string CurrencyCode,
+        string Amount
+    );
 }
