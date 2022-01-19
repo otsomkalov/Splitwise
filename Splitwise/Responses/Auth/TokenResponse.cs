@@ -1,6 +1,7 @@
-﻿namespace Splitwise.Responses.Auth;
-
-public class TokenResponse
+﻿namespace Splitwise.Responses.Auth
 {
-    public string AccessToken { get; set; }
+    public class TokenResponse
+    {
+        public string AccessToken { get; init; }
+    }
 }

@@ -4,6 +4,6 @@ namespace Splitwise.Responses.Friend
 {
     public record ListFriendsResponse
     (
-        ICollection<Friend> Friends
+        IReadOnlyCollection<Friend> Friends
     );
 }

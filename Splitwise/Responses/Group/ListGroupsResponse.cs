@@ -4,6 +4,6 @@ namespace Splitwise.Responses.Group
 {
     public class ListGroupsResponse
     {
-        public IReadOnlyCollection<GroupResponse> Groups { get; set; }
+        public IReadOnlyCollection<Group> Groups { get; init; }
     }
 }

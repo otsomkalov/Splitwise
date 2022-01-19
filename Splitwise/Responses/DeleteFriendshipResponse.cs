@@ -1,7 +1,7 @@
 namespace Splitwise.Responses
 {
-    public class DeleteFriendshipResponse
-    {
-        public bool Success { get; set; }
-    }
+    public record DeleteFriendshipResponse(
+        bool Success,
+        string Error
+    );
 }

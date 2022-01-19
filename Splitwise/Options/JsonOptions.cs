@@ -7,6 +7,7 @@ namespace Splitwise.Options
     {
         public static readonly JsonSerializerSettings JsonSerializerSettings = new ()
         {
+            NullValueHandling = NullValueHandling.Ignore,
             ContractResolver = new DefaultContractResolver
             {
                 NamingStrategy = new SnakeCaseNamingStrategy()

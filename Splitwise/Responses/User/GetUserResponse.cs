@@ -2,6 +2,6 @@
 {
     public class GetUserResponse<T>
     {
-        public T User { get; set; }
+        public T User { get; init; }
     }
 }
