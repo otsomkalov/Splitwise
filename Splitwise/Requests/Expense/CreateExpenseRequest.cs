@@ -8,26 +8,26 @@ namespace Splitwise.Requests.Expense
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     public class CreateExpenseRequest
     {
-        public double Cost { get; set; }
+        public double Cost { get; init; }
 
-        public int GroupId { get; set; }
+        public int GroupId { get; init; }
 
-        public string Description { get; set; }
+        public string Description { get; init; }
 
-        public string Details { get; set; }
+        public string Details { get; init; }
 
-        public DateTime Date { get; set; }
+        public DateTime Date { get; init; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        public RepeatInterval RepeatInterval { get; set; }
+        public RepeatInterval RepeatInterval { get; init; }
 
-        public string CurrencyCode { get; set; }
+        public string CurrencyCode { get; init; }
 
-        public int CategoryId { get; set; } = 0;
+        public int CategoryId { get; init; } = 0;
 
-        public bool? SplitEqually { get; set; }
+        public bool? SplitEqually { get; init; }
 
         [JsonIgnore]
-        public IList<PaymentRequest> Payments { get; set; }
+        public IList<BasePaymentRequest> Payments { get; init; }
     }
 }

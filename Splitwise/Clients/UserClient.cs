@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using FluentResults;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using Splitwise.Clients.Interfaces;
 using Splitwise.Requests.User;
-using Splitwise.Responses.Shared;
 using Splitwise.Responses.User;
 
 namespace Splitwise.Clients
@@ -16,32 +18,50 @@ namespace Splitwise.Clients
             _restClient = restClient;
         }
 
-        public async Task<CurrentUserResponse> GetCurrentAsync()
+        public async Task<FullUser> GetCurrentAsync()
         {
             var restRequest = new RestRequest("get_current_user");
 
-            var getUserResponse = await _restClient.GetAsync<GetUserResponse<CurrentUserResponse>>(restRequest);
+            var getUserResponse = await _restClient.GetAsync<GetUserResponse<FullUser>>(restRequest);
 
             return getUserResponse.User;
         }
 
-        public async Task<BasePersonResponse> GetAsync(int id)
+        public async Task<User> GetAsync(int id)
         {
             var restRequest = new RestRequest("get_user/{id}")
                 .AddUrlSegment("id", id);
 
-            var getUserResponse = await _restClient.GetAsync<GetUserResponse<BasePersonResponse>>(restRequest);
+            var getUserResponse = await _restClient.GetAsync<GetUserResponse<User>>(restRequest);
 
             return getUserResponse.User;
         }
 
-        public Task<CurrentUserResponse> UpdateAsync(int id, UpdateUserRequest request)
+        public async Task<Result<FullUser>> UpdateAsync(int id, UpdateUserRequest request)
         {
             var restRequest = new RestRequest("update_user/{id}")
                 .AddUrlSegment("id", id)
                 .AddJsonBody(request);
 
-            return _restClient.PostAsync<CurrentUserResponse>(restRequest);
+            var response = await _restClient.PostAsync<UpdateUserResponse>(restRequest);
+
+            if (response.Errors is not JObject jObject)
+            {
+                return Result.Ok(response.User);
+            }
+
+            if (jObject["base"] is JArray jArray)
+            {
+                var errors = jArray.ToObject<IEnumerable<string>>();
+
+                var result = new Result();
+
+                result.WithErrors(errors);
+
+                return result;
+            }
+
+            return Result.Fail("Unknown error happened");
         }
     }
 }

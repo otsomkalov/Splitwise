@@ -3,33 +3,32 @@ using RestSharp;
 using Splitwise.Clients.Interfaces;
 using Splitwise.Responses.Auth;
 
-namespace Splitwise.Clients;
-
-public class AuthClient : IAuthClient
+namespace Splitwise.Clients
 {
-    private readonly IRestClient _restClient;
-
-    public AuthClient(IRestClient restClient)
+    internal class AuthClient : IAuthClient
     {
-        _restClient = restClient;
-    }
+        private readonly IRestClient _restClient;
 
-    public async Task<TokenResponse> GetTokenAsync(string clientId, string clientSecret, string code, string redirectUrl)
-    {
-        var restRequest = new RestRequest("https://www.splitwise.com/oauth/token")
-            .AddHeader("content-type", "application/x-www-form-urlencoded")
-            .AddHeader("accept", "application/json")
-            .AddParameter("application/x-www-form-urlencoded",
-                "grant_type=authorization_code&" +
-                $"client_id={clientId}&" +
-                $"client_secret={clientSecret}&" +
-                $"code={code}&" +
-                $"redirect_uri={redirectUrl}", ParameterType.RequestBody);
+        public AuthClient(IRestClient restClient)
+        {
+            _restClient = restClient;
+        }
 
-        var tokenResponse = await _restClient.ExecutePostAsync<TokenResponse>(restRequest);
+        public async Task<TokenResponse> GetTokenAsync(string clientId, string clientSecret, string code, string redirectUrl)
+        {
+            var restRequest = new RestRequest("https://www.splitwise.com/oauth/token")
+                .AddHeader("content-type", "application/x-www-form-urlencoded")
+                .AddHeader("accept", "application/json")
+                .AddParameter("application/x-www-form-urlencoded",
+                    "grant_type=authorization_code&" +
+                    $"client_id={clientId}&" +
+                    $"client_secret={clientSecret}&" +
+                    $"code={code}&" +
+                    $"redirect_uri={redirectUrl}", ParameterType.RequestBody);
 
+            var tokenResponse = await _restClient.ExecutePostAsync<TokenResponse>(restRequest);
 
-
-        return tokenResponse.Data;
+            return tokenResponse.Data;
+        }
     }
 }

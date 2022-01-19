@@ -4,6 +4,6 @@ namespace Splitwise.Requests.Friend
 {
     public class AddFriendsRequest
     {
-        public IEnumerable<AddFriendRequest> Friends { get; set; }
+        public IEnumerable<AddFriendRequest> Friends { get; init; }
     }
 }

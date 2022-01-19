@@ -4,6 +4,6 @@ namespace Splitwise.Responses
 {
     public class Errors
     {
-        public IEnumerable<string> Base { get; set; }
+        public IReadOnlyCollection<string> Base { get; init; }
     }
 }

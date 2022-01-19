@@ -1,10 +1,9 @@
-using System;
-
 namespace Splitwise.Requests.Expense
 {
-    public partial class Receipt
+    public class Receipt
     {
-        public Uri Large { get; set; }
-        public Uri Original { get; set; }
+        public string Large { get; init; }
+
+        public string Original { get; init; }
     }
 }

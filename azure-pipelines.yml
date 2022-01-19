@@ -1,0 +1,24 @@
+trigger:
+  - main
+
+pool:
+  vmImage: windows-2022
+
+steps:
+  - task: DotNetCoreCLI@2
+    displayName: "Build project"
+    inputs:
+      command: 'build'
+      projects: '**/Splitwise.csproj'
+  - task: DotNetCoreCLI@2
+    displayName: "Pack project into NuGet package"
+    inputs:
+      command: 'pack'
+      packagesToPack: '**/Splitwise.csproj'
+      versioningScheme: 'off'
+      arguments: '-o $(Build.ArtifactStagingDirectory)'
+  - task: PublishPipelineArtifact@1
+    displayName: "Publish artifacts"
+    inputs:
+      targetPath: '$(Build.ArtifactStagingDirectory)'
+      artifactName: 'lib'

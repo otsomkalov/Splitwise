@@ -1,16 +1,22 @@
 using System.Threading.Tasks;
+using FluentResults;
 using Splitwise.Requests.User;
-using Splitwise.Responses.Shared;
 using Splitwise.Responses.User;
 
 namespace Splitwise.Clients.Interfaces
 {
     public interface IUserClient
     {
-        Task<CurrentUserResponse> GetCurrentAsync();
+        Task<FullUser> GetCurrentAsync();
 
-        Task<BasePersonResponse> GetAsync(int id);
+        Task<User> GetAsync(int id);
 
-        Task<CurrentUserResponse> UpdateAsync(int id, UpdateUserRequest request);
+        /// <summary>
+        /// Performs PATCH-like update of the user
+        /// </summary>
+        /// <param name="id">User id</param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        Task<Result<FullUser>> UpdateAsync(int id, UpdateUserRequest request);
     }
 }

@@ -5,7 +5,7 @@ using Splitwise.Responses.Currency;
 
 namespace Splitwise.Clients
 {
-    public class CurrencyClient : ICurrencyClient
+    internal class CurrencyClient : ICurrencyClient
     {
         private readonly IRestClient _restClient;
 

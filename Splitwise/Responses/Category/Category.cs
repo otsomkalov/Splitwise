@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Splitwise.Responses.Category
 {
     public record Category(
-        int Id,
-        string Name,
         string Icon,
-        IconTypes IconTypes,
-        IEnumerable<Category> Subcategories
-    );
+        IconTypes IconTypes
+    ) : BaseCategory
+    {
+        public IReadOnlyCollection<Category> Subcategories { get; init; } = Array.Empty<Category>();
+    }
 }
