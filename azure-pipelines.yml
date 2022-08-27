@@ -12,7 +12,10 @@ steps:
     displayName: "Build project"
     inputs:
       command: 'build'
-      projects: '**/Splitwise.csproj'
+  - task: DotNetCoreCLI@2
+    displayName: "Run tests"
+    inputs:
+      command: 'test'
   - task: DotNetCoreCLI@2
     displayName: "Pack project into NuGet package"
     inputs:
