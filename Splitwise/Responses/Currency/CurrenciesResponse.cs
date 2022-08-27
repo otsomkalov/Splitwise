@@ -4,7 +4,7 @@ using Splitwise.Responses.Shared;
 
 namespace Splitwise.Responses.Currency
 {
-    public record CurrenciesResponse(Errors Errors) : BaseResponse(Errors)
+    public record CurrenciesResponse
     {
         public IReadOnlyCollection<Currency> Currencies { get; init; } = Array.Empty<Currency>();
     }

@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
+using FluentAssertions;
 using Splitwise.Clients;
 using Xunit;
-using FluentAssertions;
 
 namespace Splitwise.Tests.Clients;
 
-public class CategoryClientTests
+public class CurrencyClientTests
 {
     [Fact]
     public async Task ListAsync_Works()
@@ -16,10 +16,10 @@ public class CategoryClientTests
 
         // Act
 
-        var categories = await anonymousSplitwiseClient.Category.ListAsync();
+        var currencies = await anonymousSplitwiseClient.Currency.ListAsync();
 
         // Assert
 
-        categories.Should().NotBeNullOrEmpty();
+        currencies.Should().NotBeNullOrEmpty();
     }
 }

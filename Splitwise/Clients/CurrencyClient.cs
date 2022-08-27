@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using RestSharp;
 using Splitwise.Clients.Interfaces;
 using Splitwise.Responses.Currency;
@@ -14,11 +15,12 @@ namespace Splitwise.Clients
             _restClient = restClient;
         }
 
-        public Task<CurrenciesResponse> ListAsync()
+        public async Task<IReadOnlyCollection<Currency>> ListAsync()
         {
             var request = new RestRequest("get_currencies");
+            var response = await _restClient.GetAsync<CurrenciesResponse>(request);
 
-            return _restClient.GetAsync<CurrenciesResponse>(request);
+            return response.Currencies;
         }
     }
 }
