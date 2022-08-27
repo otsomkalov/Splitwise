@@ -2,7 +2,12 @@
 {
     public class CreateExpenseFromSentenceRequest
     {
-        public string Input { get; init; }
+        public CreateExpenseFromSentenceRequest(string input)
+        {
+            Input = input;
+        }
+
+        public string Input { get; }
 
         public int? FriendId { get; init; }
 

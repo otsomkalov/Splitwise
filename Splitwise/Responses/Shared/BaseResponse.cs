@@ -1,4 +1,6 @@
-﻿namespace Splitwise.Responses.Shared
+﻿namespace Splitwise.Responses.Shared;
+
+public record BaseResponse
 {
-    public record BaseResponse(Errors Errors);
+    public Errors Errors { get; init; }
 }

@@ -1,7 +1,16 @@
-﻿namespace Splitwise.Responses.Expense
+﻿using System.Collections.Generic;
+
+namespace Splitwise.Responses.Expense
 {
+    public class CreateExpenseFromSentenceErrors : Errors
+    {
+        public IReadOnlyCollection<string> Cost { get; set; }
+
+        public IReadOnlyCollection<string> Shares { get; set; }
+    }
+
     public record CreateExpenseFromSentenceResponse(
-        FullExpense Expense,
+        CreatedBySentenceExpense Expense,
         bool Valid,
         decimal Confidence,
         string Error

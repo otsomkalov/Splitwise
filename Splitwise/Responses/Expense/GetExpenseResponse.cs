@@ -1,6 +1,8 @@
-﻿namespace Splitwise.Responses.Expense
+﻿using Splitwise.Responses.Shared;
+
+namespace Splitwise.Responses.Expense
 {
-    internal class GetExpenseResponse
+    public record GetExpenseResponse : BaseResponse
     {
         public FullExpense Expense { get; init; }
     }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using FluentResults;
@@ -24,14 +25,19 @@ namespace Splitwise.Clients
             _restClient = restClient;
         }
 
-        public async Task<FullExpense> GetAsync(long id)
+        public async Task<Result<FullExpense>> GetAsync(long id)
         {
             var request = new RestRequest("get_expense/{id}")
                 .AddUrlSegment("id", id);
 
-            var response = await _restClient.GetAsync<GetExpenseResponse>(request);
+            var response = await _restClient.ExecuteGetAsync<GetExpenseResponse>(request);
 
-            return response.Expense;
+            return response.StatusCode switch
+            {
+                HttpStatusCode.OK => Result.Ok(response.Data.Expense),
+                HttpStatusCode.Forbidden => Result.Fail(new ForbiddenError(response.Data.Errors.Base.First())),
+                _ => Result.Fail(new UnknownError(response.Content))
+            };
         }
 
         public async Task<IReadOnlyCollection<Expense>> ListAsync()
@@ -43,41 +49,33 @@ namespace Splitwise.Clients
             return response.Expenses;
         }
 
-        public async Task<Result<Expense>> CreateAsync(UpsertExpenseRequest request)
+        public async Task<Result<Expense>> CreateAsync(CreateEqualSplitExpenseRequest request)
         {
-            var getRequestBodyResult = await GetUpsertRequestBodyAsync(request);
+            var validationResult = await ValidateRequestAsync(request);
 
-            if (getRequestBodyResult.IsFailed)
+            if (validationResult.IsFailed)
             {
-                return getRequestBodyResult.ToResult();
+                return validationResult;
             }
 
             var restRequest = new RestRequest("create_expense")
-                .AddJsonBody(getRequestBodyResult.Value);
-
-            var (expenses, errors) = await _restClient.PostAsync<UpsertExpenseResponse>(restRequest);
-
-            if (errors.Base == null)
-            {
-                return Result.Ok(expenses.First());
-            }
-
-            var result = new Result();
-
-            result.WithErrors(errors.Base);
-
-            return result;
-        }
-
-        public Task<CreateExpenseFromSentenceResponse> CreateFromSentenceAsync(CreateExpenseFromSentenceRequest request)
-        {
-            var restRequest = new RestRequest("parse_expense")
                 .AddJsonBody(request);
 
-            return _restClient.PostAsync<CreateExpenseFromSentenceResponse>(restRequest);
+            var (expenses, errors) = await _restClient.PostAsync<UpsertExpenseResponse>(restRequest);
+
+            if (errors.Base == null)
+            {
+                return Result.Ok(expenses.First());
+            }
+
+            var result = new Result();
+
+            result.WithErrors(errors.Base);
+
+            return result;
         }
 
-        public async Task<Result<Expense>> UpdateAsync(int id, UpsertExpenseRequest request)
+        public async Task<Result<Expense>> CreateAsync(CreateSharesSplitExpenseRequest request)
         {
             var getRequestBodyResult = await GetUpsertRequestBodyAsync(request);
 
@@ -103,7 +101,66 @@ namespace Splitwise.Clients
             return result;
         }
 
-        public async Task<Result> DeleteAsync(int id)
+        public async Task<Result<FullExpense>> CreateFromSentenceAsync(CreateExpenseFromSentenceRequest request)
+        {
+            var restRequest = new RestRequest("parse_sentence")
+                .AddJsonBody(request);
+
+            var response = await _restClient.ExecutePostAsync<CreateExpenseFromSentenceResponse>(restRequest);
+
+            if (!response.Data.Valid)
+            {
+                var result = new Result();
+
+                if (response.Data.Expense.Errors.Cost.Any())
+                {
+                    result = result.WithError(new ParsingError("cost", response.Data.Expense.Errors.Cost));
+                }
+
+                if (response.Data.Expense.Errors.Shares.Any())
+                {
+                    result = result.WithError(new ParsingError("shares", response.Data.Expense.Errors.Cost));
+                }
+
+                if (response.Data.Expense.Errors.Base.Any())
+                {
+                    result = result.WithError(new ParsingError("base", response.Data.Expense.Errors.Cost));
+                }
+
+                return result;
+            }
+
+            return Result.Ok(response.Data.Expense as FullExpense);
+        }
+
+        public async Task<Result<Expense>> UpdateAsync(long id, UpdateSharesSplitExpenseRequest request)
+        {
+            var getRequestBodyResult = await GetUpsertRequestBodyAsync(request);
+
+            if (getRequestBodyResult.IsFailed)
+            {
+                return getRequestBodyResult.ToResult();
+            }
+
+            var restRequest = new RestRequest("update_expense/{id}")
+                .AddUrlSegment("id", id)
+                .AddJsonBody(getRequestBodyResult.Value);
+
+            var (expenses, errors) = await _restClient.PostAsync<UpsertExpenseResponse>(restRequest);
+
+            if (errors.Base == null)
+            {
+                return Result.Ok(expenses.First());
+            }
+
+            var result = new Result();
+
+            result.WithErrors(errors.Base);
+
+            return result;
+        }
+
+        public async Task<Result> DeleteAsync(long id)
         {
             var request = new RestRequest("delete_expense/{id}")
                 .AddUrlSegment("id", id);
@@ -122,7 +179,7 @@ namespace Splitwise.Clients
             return result;
         }
 
-        public async Task<Result> RestoreAsync(int id)
+        public async Task<Result> RestoreAsync(long id)
         {
             var request = new RestRequest("undelete_expense/{id}")
                 .AddUrlSegment("id", id);
@@ -141,12 +198,11 @@ namespace Splitwise.Clients
             return result;
         }
 
-        private static async Task<Result<Dictionary<string, string>>> GetUpsertRequestBodyAsync(UpsertExpenseRequest request)
+        private static async Task<Result<Dictionary<string, string>>> GetUpsertRequestBodyAsync(BaseSharesSplitExpenseRequest request)
         {
             var result = new Result<Dictionary<string, string>>();
 
-            var validator = new CreateExpenseRequestValidator();
-
+            var validator = new BaseExpenseRequestValidator();
             var validationResult = await validator.ValidateAsync(request);
 
             if (!validationResult.IsValid)
@@ -163,9 +219,11 @@ namespace Splitwise.Clients
                 JsonConvert.SerializeObject(request, JsonOptions.JsonSerializerSettings),
                 JsonOptions.JsonSerializerSettings);
 
-            for (var i = 0; i < request.Payments.Count; i++)
+            var paymentsRequests = request.Payments.ToArray();
+
+            for (var i = 0; i < paymentsRequests.Length; i++)
             {
-                var payment = request.Payments[i];
+                var payment = paymentsRequests[i];
 
                 if (payment is ExistingUserPayment existingUserPayment)
                 {
@@ -179,6 +237,26 @@ namespace Splitwise.Clients
             }
 
             return result.WithValue(requestBody);
+        }
+
+        private static async Task<Result> ValidateRequestAsync(BaseExpenseRequest request)
+        {
+            var result = new Result();
+
+            var validator = new BaseExpenseRequestValidator();
+            var validationResult = await validator.ValidateAsync(request);
+
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    result.WithError(new ValidationError(error.ErrorMessage));
+                }
+
+                return result;
+            }
+
+            return Result.Ok();
         }
 
         private static IDictionary<string, string> GetPaymentRequestBody<T>(T payment, int paymentIndex)
