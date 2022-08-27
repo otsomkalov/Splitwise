@@ -2,7 +2,7 @@ trigger:
   - main
 
 pr:
-  -main
+  - main
 
 pool:
   vmImage: windows-2022
