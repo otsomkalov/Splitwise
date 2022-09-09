@@ -131,7 +131,7 @@ public class ExpenseClientTests
     {
         // Arrange
 
-        var request = new CreateExpenseFromSentenceRequest("I owe Eve one UAH");
+        var request = new CreateExpenseFromSentenceRequest("I owe Bob one dollar");
 
         // Act
 
