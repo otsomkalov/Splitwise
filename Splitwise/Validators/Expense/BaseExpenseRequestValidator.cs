@@ -12,9 +12,6 @@ namespace Splitwise.Validators.Expense
             RuleFor(r => r.Cost)
                 .GreaterThan(0);
 
-            // RuleFor(r => r.Date)
-            //     .GreaterThan(DateTime.MinValue);
-
             RuleFor(r => r.GroupId)
                 .GreaterThanOrEqualTo(0);
 

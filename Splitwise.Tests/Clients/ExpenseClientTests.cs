@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoFixture;
 using FluentAssertions;
 using Microsoft.Extensions.Options;
 using Splitwise.Clients.Interfaces;
@@ -16,10 +17,16 @@ public class ExpenseClientTests
     private readonly ISplitwiseClient _client;
     private readonly ExpenseClientTestsSettings _settings;
 
+    private readonly int _paid;
+
     public ExpenseClientTests(ISplitwiseClient client, IOptions<ExpenseClientTestsSettings> settings)
     {
         _client = client;
         _settings = settings.Value;
+
+        var fixture = new Fixture();
+
+        _paid = fixture.Create<int>() % 20;
     }
 
     [Fact]
@@ -32,6 +39,7 @@ public class ExpenseClientTests
         // Assert
 
         expenses.Should().NotBeNullOrEmpty();
+        expenses.Should().Contain(e => e.Id == _settings.ExistingExpenseId);
     }
 
     [Fact]
@@ -46,6 +54,7 @@ public class ExpenseClientTests
         getExpenseResult.Should().NotBeNull();
         getExpenseResult.IsSuccess.Should().BeTrue();
         getExpenseResult.Value.Should().NotBeNull();
+        getExpenseResult.Value.Id.Should().Be(_settings.ExistingExpenseId);
     }
 
     [Fact]
@@ -59,6 +68,7 @@ public class ExpenseClientTests
 
         getExpenseResult.Should().NotBeNull();
         getExpenseResult.IsFailed.Should().BeTrue();
+        getExpenseResult.Errors.Should().AllBeOfType<ForbiddenError>();
     }
 
     [Fact]
@@ -66,7 +76,7 @@ public class ExpenseClientTests
     {
         // Arrange
 
-        var createRequest = new CreateEqualSplitExpenseRequest(1, "Test", "UAH", _settings.GroupId);
+        var createRequest = new CreateEqualSplitExpenseRequest(_paid, "Test", "UAH", _settings.GroupId);
 
         // Act
 
@@ -90,17 +100,17 @@ public class ExpenseClientTests
             {
                 UserId = _settings.CurrentUserId,
                 OwedShare = 0,
-                PaidShare = 1
+                PaidShare = _paid
             },
             new ExistingUserPayment
             {
                 UserId = _settings.FriendId,
-                OwedShare = 1,
+                OwedShare = _paid,
                 PaidShare = 0
             }
         };
 
-        var createRequest = new CreateSharesSplitExpenseRequest(1, "test", "UAH", payments);
+        var createRequest = new CreateSharesSplitExpenseRequest(_paid, "test", "UAH", payments);
 
         // Act
 
@@ -111,6 +121,9 @@ public class ExpenseClientTests
         createExpenseResult.Should().NotBeNull();
         createExpenseResult.IsSuccess.Should().BeTrue();
         createExpenseResult.Value.Should().NotBeNull();
+        createExpenseResult.Value.Cost.Should().Be(_paid);
+        createExpenseResult.Value.Users.Should().Contain(up => up.PaidShare == _paid);
+        createExpenseResult.Value.Users.Should().Contain(up => up.OwedShare == _paid);
     }
 
     [Fact]
@@ -159,19 +172,19 @@ public class ExpenseClientTests
         {
             new ExistingUserPayment
             {
-                UserId = _settings.FriendId,
-                OwedShare = 0,
-                PaidShare = 2
+                UserId = _settings.CurrentUserId,
+                OwedShare = _paid,
+                PaidShare = 0
             },
             new ExistingUserPayment
             {
-                UserId = _settings.CurrentUserId,
-                OwedShare = 2,
-                PaidShare = 0
+                UserId = _settings.FriendId,
+                OwedShare = 0,
+                PaidShare = _paid
             }
         };
 
-        var request = new UpdateSharesSplitExpenseRequest(2, "Updated test expense", "UAH", payments);
+        var request = new UpdateSharesSplitExpenseRequest(_paid, "Updated test expense", "UAH", payments);
 
         // Act
 
@@ -182,6 +195,9 @@ public class ExpenseClientTests
         updateExpenseResult.Should().NotBeNull();
         updateExpenseResult.IsSuccess.Should().BeTrue();
         updateExpenseResult.Value.Should().NotBeNull();
+        updateExpenseResult.Value.Cost.Should().Be(_paid);
+        updateExpenseResult.Value.Users.Should().Contain(up => up.PaidShare == _paid);
+        updateExpenseResult.Value.Users.Should().Contain(up => up.OwedShare == _paid);
     }
 
     [Fact]

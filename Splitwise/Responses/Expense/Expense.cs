@@ -12,7 +12,7 @@ namespace Splitwise.Responses.Expense
 
         public int CommentsCount { get; init; }
 
-        public string Cost { get; init; }
+        public double Cost { get; init; }
 
         public DateTimeOffset CreatedAt { get; init; }
 
