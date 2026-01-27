@@ -1,4 +1,4 @@
-﻿namespace Splitwise.Responses.Friend;
+namespace Splitwise.Responses.Friend;
 
 public record AddFriendResponse(
     Friend Friend,

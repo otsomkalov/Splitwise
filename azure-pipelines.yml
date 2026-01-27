@@ -5,26 +5,47 @@ pr:
   - main
 
 pool:
-  vmImage: windows-2022
+  vmImage: 'ubuntu-latest'
+
+variables:
+  revision: $[counter(variables['minor'], 1)] # This will get reset every time minor gets bumped.
+  version: '$(major).$(minor).$(revision)'
+  Configuration: 'Release'
 
 steps:
+  - task: UseDotNet@2
+    inputs:
+      version: '10.x'
+  - task: DotNetCoreCLI@2
+    name: Restore
+    inputs:
+      command: 'restore'
+      projects: 'Splitwise/*.csproj'
   - task: DotNetCoreCLI@2
     displayName: "Build project"
     inputs:
       command: 'build'
+      projects: 'Splitwise/*.csproj'
+      arguments: '-c $(Configuration)'
+  - task: DotNetCoreCLI@2
+    displayName: 'Run all tests'
+    inputs:
+      command: 'test'
+      projects: 'Splitwise.Tests/**.csproj'
+      arguments: '-r $(Runtime) --configuration $(Configuration) --collect:"XPlat Code Coverage"'
   - task: DotNetCoreCLI@2
     displayName: "Run tests"
     inputs:
       command: 'test'
   - task: DotNetCoreCLI@2
-    displayName: "Pack project into NuGet package"
+    name: Pack
     inputs:
       command: 'pack'
       packagesToPack: '**/Splitwise.csproj'
-      versioningScheme: 'off'
-      arguments: '-o $(Build.ArtifactStagingDirectory)'
+      nobuild: true
+      versionEnvVar: 'version'
+      versioningScheme: 'byEnvVar'
   - task: PublishPipelineArtifact@1
-    displayName: "Publish artifacts"
+    name: Publish
     inputs:
       targetPath: '$(Build.ArtifactStagingDirectory)'
-      artifactName: 'lib'

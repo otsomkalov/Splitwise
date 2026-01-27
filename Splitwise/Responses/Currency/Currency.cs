@@ -1,4 +1,4 @@
-﻿namespace Splitwise.Responses.Currency
+namespace Splitwise.Responses.Currency
 {
     public record Currency(
         string CurrencyCode,

@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using RestSharp;
 using Splitwise.Clients.Interfaces;
 using Splitwise.Responses.Auth;

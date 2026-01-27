@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Splitwise.Responses.Friend;
 
 namespace Splitwise.Responses.User

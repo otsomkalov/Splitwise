@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 using Splitwise.Requests.Friend;
 
 namespace Splitwise.Validators.Friend;

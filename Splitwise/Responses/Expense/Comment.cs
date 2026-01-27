@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Splitwise.Responses.User;
 
 namespace Splitwise.Responses.Expense

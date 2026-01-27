@@ -1,4 +1,4 @@
-﻿namespace Splitwise.Requests.Expense
+namespace Splitwise.Requests.Expense
 {
     public class CreateExpenseFromSentenceRequest
     {

@@ -1,4 +1,4 @@
-﻿namespace Splitwise.Responses.Category
+namespace Splitwise.Responses.Category
 {
     public record IconTypes(
         IconType Slim,

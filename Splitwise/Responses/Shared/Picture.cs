@@ -1,4 +1,4 @@
-﻿namespace Splitwise.Responses.Shared
+namespace Splitwise.Responses.Shared
 {
     public record Picture
     {

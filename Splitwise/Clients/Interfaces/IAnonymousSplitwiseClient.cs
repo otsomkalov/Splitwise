@@ -1,4 +1,4 @@
-﻿namespace Splitwise.Clients.Interfaces
+namespace Splitwise.Clients.Interfaces
 {
     public interface IAnonymousSplitwiseClient
     {

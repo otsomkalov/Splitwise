@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Splitwise.Requests.Expense;
 using Splitwise.Responses.Category;

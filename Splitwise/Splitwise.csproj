@@ -10,7 +10,6 @@
     <PackageProjectUrl>https://github.com/otsomkalov/Splitwise</PackageProjectUrl>
     <RepositoryUrl>https://github.com/otsomkalov/Splitwise</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageVersion>0.0.9</PackageVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 

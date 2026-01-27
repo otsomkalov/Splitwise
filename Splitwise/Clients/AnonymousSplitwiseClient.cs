@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using RestSharp;
 using RestSharp.Serializers.NewtonsoftJson;
 using Splitwise.Clients.Interfaces;

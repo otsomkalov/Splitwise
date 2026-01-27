@@ -1,4 +1,4 @@
-﻿using Splitwise.Responses.Shared;
+using Splitwise.Responses.Shared;
 
 namespace Splitwise.Responses.User
 {

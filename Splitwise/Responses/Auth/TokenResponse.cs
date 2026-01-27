@@ -1,4 +1,4 @@
-﻿namespace Splitwise.Responses.Auth
+namespace Splitwise.Responses.Auth
 {
     public class TokenResponse
     {

@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 using Splitwise.Requests.Expense;
 
 namespace Splitwise.Validators.Expense

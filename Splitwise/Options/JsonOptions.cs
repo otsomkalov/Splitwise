@@ -5,7 +5,7 @@ namespace Splitwise.Options
 {
     public static class JsonOptions
     {
-        public static readonly JsonSerializerSettings JsonSerializerSettings = new ()
+        public static readonly JsonSerializerSettings JsonSerializerSettings = new()
         {
             NullValueHandling = NullValueHandling.Ignore,
             ContractResolver = new DefaultContractResolver

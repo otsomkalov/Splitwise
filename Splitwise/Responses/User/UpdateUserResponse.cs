@@ -1,4 +1,4 @@
-﻿namespace Splitwise.Responses.User
+namespace Splitwise.Responses.User
 {
     public class UpdateUserResponse
     {

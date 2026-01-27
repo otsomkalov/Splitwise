@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Splitwise.Responses.Friend
 {
-    public record AddFriendsResponse (
+    public record AddFriendsResponse(
         IReadOnlyCollection<Friend> Users,
         Errors Errors
     );
