@@ -7,11 +7,15 @@ pr:
 pool:
   vmImage: windows-2022
 
+variables:
+  Configuration: 'Release'
+
 steps:
   - task: DotNetCoreCLI@2
     displayName: "Build project"
     inputs:
       command: 'build'
+      arguments: '-c $(Configuration)'
   - task: DotNetCoreCLI@2
     displayName: "Run tests"
     inputs:
