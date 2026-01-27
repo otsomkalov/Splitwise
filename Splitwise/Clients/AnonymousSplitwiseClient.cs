@@ -1,6 +1,6 @@
 ﻿using System;
 using RestSharp;
-using RestSharp.Serializers.NewtonsoftJson;
+using RestSharp.Serializers.Json;
 using Splitwise.Clients.Interfaces;
 using Splitwise.Options;
 
@@ -14,8 +14,8 @@ namespace Splitwise.Clients
 
         public AnonymousSplitwiseClient()
         {
-            RestClient = new RestClient(SplitwiseUrl)
-                .UseNewtonsoftJson(JsonOptions.JsonSerializerSettings);
+            RestClient = new RestClient(SplitwiseUrl,
+                configureSerialization: config => config.UseSystemTextJson(JsonOptions.JsonSerializerSettings));
 
             Currency = new CurrencyClient(RestClient);
             Category = new CategoryClient(RestClient);
