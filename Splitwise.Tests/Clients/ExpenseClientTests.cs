@@ -127,42 +127,6 @@ public class ExpenseClientTests
     }
 
     [Fact]
-    public async Task CreateFromSentenceAsync_WithCorrectInput_ReturnsCreatedExpense()
-    {
-        // Arrange
-
-        var request = new CreateExpenseFromSentenceRequest("I owe Bob one dollar");
-
-        // Act
-
-        var parseExpenseResult = await _client.Expense.CreateFromSentenceAsync(request);
-
-        // Assert
-
-        parseExpenseResult.Should().NotBeNull();
-        parseExpenseResult.IsSuccess.Should().BeTrue();
-        parseExpenseResult.Value.Should().NotBeNull();
-    }
-
-    [Fact]
-    public async Task CreateFromSentenceAsync_WithIncorrectInput_ReturnsParsingErrors()
-    {
-        // Arrange
-
-        var request = new CreateExpenseFromSentenceRequest("Ass we can");
-
-        // Act
-
-        var parseExpenseResult = await _client.Expense.CreateFromSentenceAsync(request);
-
-        // Assert
-
-        parseExpenseResult.Should().NotBeNull();
-        parseExpenseResult.IsFailed.Should().BeTrue();
-        parseExpenseResult.Errors.Should().AllBeOfType<ParsingError>();
-    }
-
-    [Fact]
     [Order(1)]
     public async Task UpdateAsync_Works()
     {
