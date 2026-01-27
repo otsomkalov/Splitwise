@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using FluentResults;
-using Newtonsoft.Json;
 using RestSharp;
 using Splitwise.Clients.Interfaces;
 using Splitwise.Errors;
@@ -198,9 +199,9 @@ namespace Splitwise.Clients
             return result;
         }
 
-        private static async Task<Result<Dictionary<string, string>>> GetUpsertRequestBodyAsync(BaseSharesSplitExpenseRequest request)
+        private static async Task<Result<Dictionary<string, object>>> GetUpsertRequestBodyAsync(BaseSharesSplitExpenseRequest request)
         {
-            var result = new Result<Dictionary<string, string>>();
+            var result = new Result<Dictionary<string, object>>();
 
             var validator = new BaseExpenseRequestValidator();
             var validationResult = await validator.ValidateAsync(request);
@@ -215,8 +216,8 @@ namespace Splitwise.Clients
                 return result;
             }
 
-            var requestBody = JsonConvert.DeserializeObject<Dictionary<string, string>>(
-                JsonConvert.SerializeObject(request, JsonOptions.JsonSerializerSettings),
+            var requestBody = JsonSerializer.Deserialize<Dictionary<string, object>>(
+                JsonSerializer.Serialize(request, JsonOptions.JsonSerializerSettings),
                 JsonOptions.JsonSerializerSettings);
 
             var paymentsRequests = request.Payments.ToArray();
@@ -259,15 +260,15 @@ namespace Splitwise.Clients
             return Result.Ok();
         }
 
-        private static IDictionary<string, string> GetPaymentRequestBody<T>(T payment, int paymentIndex)
+        private static IDictionary<string, object> GetPaymentRequestBody<T>(T payment, int paymentIndex)
         {
-            var requestBody = new Dictionary<string, string>();
+            var requestBody = new Dictionary<string, object>();
 
             foreach (var property in typeof(T).GetProperties())
             {
-                var jsonPropertyAttribute = property.GetCustomAttribute<JsonPropertyAttribute>();
+                var jsonPropertyAttribute = property.GetCustomAttribute<JsonPropertyNameAttribute>();
 
-                if (jsonPropertyAttribute == null || string.IsNullOrEmpty(jsonPropertyAttribute.PropertyName))
+                if (jsonPropertyAttribute == null || string.IsNullOrEmpty(jsonPropertyAttribute.Name))
                 {
                     continue;
                 }
@@ -276,7 +277,7 @@ namespace Splitwise.Clients
 
                 if (propertyValue != null)
                 {
-                    requestBody.Add(string.Format(jsonPropertyAttribute.PropertyName, paymentIndex), propertyValue.ToString());
+                    requestBody.Add(string.Format(jsonPropertyAttribute.Name, paymentIndex), propertyValue.ToString());
                 }
             }
 

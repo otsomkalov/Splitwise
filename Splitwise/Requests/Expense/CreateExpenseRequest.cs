@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
 
 namespace Splitwise.Requests.Expense
 {
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     public class CreateExpenseRequest
     {
         public double Cost { get; init; }
@@ -18,7 +16,7 @@ namespace Splitwise.Requests.Expense
 
         public DateTime Date { get; init; }
 
-        [JsonConverter(typeof(StringEnumConverter))]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public RepeatInterval RepeatInterval { get; init; }
 
         public string CurrencyCode { get; init; }

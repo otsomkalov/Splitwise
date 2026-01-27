@@ -10,15 +10,14 @@
     <PackageProjectUrl>https://github.com/otsomkalov/Splitwise</PackageProjectUrl>
     <RepositoryUrl>https://github.com/otsomkalov/Splitwise</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <PackageVersion>0.0.10</PackageVersion>
+    <PackageVersion>0.0.11</PackageVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentResults" Version="3.1.0"/>
     <PackageReference Include="FluentValidation" Version="10.3.6"/>
-    <PackageReference Include="RestSharp" Version="106.15.0"/>
-    <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="106.15.0"/>
+    <PackageReference Include="RestSharp" Version="113.1.0"/>
   </ItemGroup>
 
 </Project>
