@@ -8,7 +8,7 @@ namespace Splitwise.Responses.Expense
         string Content,
         string CommentType,
         string RelationType,
-        int RelationId,
+        long RelationId,
         DateTime CreatedAt,
         DateTime? DeletedAt,
         BaseUser User
