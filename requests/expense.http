@@ -1,0 +1,7 @@
+﻿###
+GET https://secure.splitwise.com/api/v3.0/get_expenses
+Authorization: Bearer {{access_token}}
+
+###
+GET https://secure.splitwise.com/api/v3.0/get_expense/{{expense_id}}
+Authorization: Bearer {{access_token}}

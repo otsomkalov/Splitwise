@@ -6,11 +6,11 @@ using Microsoft.Extensions.Options;
 using Splitwise.Clients.Interfaces;
 using Splitwise.Errors;
 using Splitwise.Requests.Expense;
-using Splitwise.Tests.Settings;
+using Splitwise.Tests.Integration.Settings;
 using Xunit;
 using Xunit.Extensions.Ordering;
 
-namespace Splitwise.Tests.Clients;
+namespace Splitwise.Tests.Integration.Clients;
 
 public class ExpenseClientTests
 {
