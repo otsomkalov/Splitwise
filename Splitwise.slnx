@@ -2,8 +2,9 @@
   <Folder Name="/Solution Items/">
     <File Path="README.MD" />
   </Folder>
-  <Folder Name="/Tests/">
-    <Project Path="Splitwise.Tests/Splitwise.Tests.csproj" />
+  <Folder Name="/tests/">
+    <Project Path="tests/Splitwise.Tests.Integration/Splitwise.Tests.Integration.csproj" />
+    <Project Path="tests/Splitwise.Tests.Unit/Splitwise.Tests.Unit.csproj" />
   </Folder>
   <Project Path="Splitwise/Splitwise.csproj" />
 </Solution>

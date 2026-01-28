@@ -10,7 +10,7 @@ namespace Splitwise.Responses.User
 
         public string DefaultCurrency { get; init; }
 
-        public string DefaultGroupId { get; init; }
+        public int DefaultGroupId { get; init; }
 
         public string ForceRefreshAt { get; init; }
 

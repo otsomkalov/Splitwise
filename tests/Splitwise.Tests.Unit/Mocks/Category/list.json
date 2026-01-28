@@ -1,0 +1,318 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Utilities",
+      "icon": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square/utilities/other.png",
+      "icon_types": {
+        "slim": {
+          "small": "https://s3.amazonaws.com/splitwise/uploads/category/icon/slim/utilities/other.png",
+          "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/slim/utilities/other@2x.png"
+        },
+        "square": {
+          "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/utilities/other@2x.png",
+          "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/utilities/other@3x.png"
+        },
+        "transparent": {
+          "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/transparent/utilities/other@2x.png",
+          "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/transparent/utilities/other@3x.png"
+        },
+        "outline_light": {
+          "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_light/utilities/other@2x.png",
+          "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_light/utilities/other@3x.png"
+        },
+        "outline_dark": {
+          "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_dark/utilities/other@2x.png",
+          "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_dark/utilities/other@3x.png"
+        },
+        "filled_color_light": {
+          "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_light/utilities/other@2x.png",
+          "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_light/utilities/other@3x.png"
+        },
+        "filled_color_dark": {
+          "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_dark/utilities/other@2x.png",
+          "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_dark/utilities/other@3x.png"
+        }
+      },
+      "colors": {
+        "light": "#c8e8f1",
+        "dark": "#84cce0"
+      },
+      "subcategories": [
+        {
+          "id": 48,
+          "name": "Cleaning",
+          "icon": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square/utilities/cleaning.png",
+          "icon_types": {
+            "slim": {
+              "small": "https://s3.amazonaws.com/splitwise/uploads/category/icon/slim/utilities/cleaning.png",
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/slim/utilities/cleaning@2x.png"
+            },
+            "square": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/utilities/cleaning@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/utilities/cleaning@3x.png"
+            },
+            "transparent": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/transparent/utilities/cleaning@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/transparent/utilities/cleaning@3x.png"
+            },
+            "outline_light": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_light/utilities/cleaning@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_light/utilities/cleaning@3x.png"
+            },
+            "outline_dark": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_dark/utilities/cleaning@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_dark/utilities/cleaning@3x.png"
+            },
+            "filled_color_light": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_light/utilities/cleaning@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_light/utilities/cleaning@3x.png"
+            },
+            "filled_color_dark": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_dark/utilities/cleaning@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_dark/utilities/cleaning@3x.png"
+            }
+          },
+          "colors": {
+            "light": "#c8e8f1",
+            "dark": "#84cce0"
+          }
+        },
+        {
+          "id": 5,
+          "name": "Electricity",
+          "icon": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square/utilities/electricity.png",
+          "icon_types": {
+            "slim": {
+              "small": "https://s3.amazonaws.com/splitwise/uploads/category/icon/slim/utilities/electricity.png",
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/slim/utilities/electricity@2x.png"
+            },
+            "square": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/utilities/electricity@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/utilities/electricity@3x.png"
+            },
+            "transparent": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/transparent/utilities/electricity@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/transparent/utilities/electricity@3x.png"
+            },
+            "outline_light": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_light/utilities/electricity@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_light/utilities/electricity@3x.png"
+            },
+            "outline_dark": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_dark/utilities/electricity@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_dark/utilities/electricity@3x.png"
+            },
+            "filled_color_light": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_light/utilities/electricity@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_light/utilities/electricity@3x.png"
+            },
+            "filled_color_dark": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_dark/utilities/electricity@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_dark/utilities/electricity@3x.png"
+            }
+          },
+          "colors": {
+            "light": "#c8e8f1",
+            "dark": "#84cce0"
+          }
+        },
+        {
+          "id": 6,
+          "name": "Heat/gas",
+          "icon": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square/utilities/heat-gas.png",
+          "icon_types": {
+            "slim": {
+              "small": "https://s3.amazonaws.com/splitwise/uploads/category/icon/slim/utilities/heat-gas.png",
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/slim/utilities/heat-gas@2x.png"
+            },
+            "square": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/utilities/heat-gas@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/utilities/heat-gas@3x.png"
+            },
+            "transparent": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/transparent/utilities/heat-gas@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/transparent/utilities/heat-gas@3x.png"
+            },
+            "outline_light": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_light/utilities/heat-gas@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_light/utilities/heat-gas@3x.png"
+            },
+            "outline_dark": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_dark/utilities/heat-gas@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_dark/utilities/heat-gas@3x.png"
+            },
+            "filled_color_light": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_light/utilities/heat-gas@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_light/utilities/heat-gas@3x.png"
+            },
+            "filled_color_dark": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_dark/utilities/heat-gas@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_dark/utilities/heat-gas@3x.png"
+            }
+          },
+          "colors": {
+            "light": "#c8e8f1",
+            "dark": "#84cce0"
+          }
+        },
+        {
+          "id": 11,
+          "name": "Other",
+          "icon": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square/utilities/other.png",
+          "icon_types": {
+            "slim": {
+              "small": "https://s3.amazonaws.com/splitwise/uploads/category/icon/slim/utilities/other.png",
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/slim/utilities/other@2x.png"
+            },
+            "square": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/utilities/other@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/utilities/other@3x.png"
+            },
+            "transparent": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/transparent/utilities/other@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/transparent/utilities/other@3x.png"
+            },
+            "outline_light": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_light/utilities/other@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_light/utilities/other@3x.png"
+            },
+            "outline_dark": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_dark/utilities/other@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_dark/utilities/other@3x.png"
+            },
+            "filled_color_light": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_light/utilities/other@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_light/utilities/other@3x.png"
+            },
+            "filled_color_dark": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_dark/utilities/other@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_dark/utilities/other@3x.png"
+            }
+          },
+          "colors": {
+            "light": "#c8e8f1",
+            "dark": "#84cce0"
+          }
+        },
+        {
+          "id": 37,
+          "name": "Trash",
+          "icon": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square/utilities/trash.png",
+          "icon_types": {
+            "slim": {
+              "small": "https://s3.amazonaws.com/splitwise/uploads/category/icon/slim/utilities/trash.png",
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/slim/utilities/trash@2x.png"
+            },
+            "square": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/utilities/trash@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/utilities/trash@3x.png"
+            },
+            "transparent": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/transparent/utilities/trash@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/transparent/utilities/trash@3x.png"
+            },
+            "outline_light": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_light/utilities/trash@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_light/utilities/trash@3x.png"
+            },
+            "outline_dark": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_dark/utilities/trash@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_dark/utilities/trash@3x.png"
+            },
+            "filled_color_light": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_light/utilities/trash@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_light/utilities/trash@3x.png"
+            },
+            "filled_color_dark": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_dark/utilities/trash@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_dark/utilities/trash@3x.png"
+            }
+          },
+          "colors": {
+            "light": "#c8e8f1",
+            "dark": "#84cce0"
+          }
+        },
+        {
+          "id": 8,
+          "name": "TV/Phone/Internet",
+          "icon": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square/utilities/tv-phone-internet.png",
+          "icon_types": {
+            "slim": {
+              "small": "https://s3.amazonaws.com/splitwise/uploads/category/icon/slim/utilities/tv-phone-internet.png",
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/slim/utilities/tv-phone-internet@2x.png"
+            },
+            "square": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/utilities/tv-phone-internet@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/utilities/tv-phone-internet@3x.png"
+            },
+            "transparent": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/transparent/utilities/tv-phone-internet@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/transparent/utilities/tv-phone-internet@3x.png"
+            },
+            "outline_light": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_light/utilities/tv-phone-internet@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_light/utilities/tv-phone-internet@3x.png"
+            },
+            "outline_dark": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_dark/utilities/tv-phone-internet@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_dark/utilities/tv-phone-internet@3x.png"
+            },
+            "filled_color_light": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_light/utilities/tv-phone-internet@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_light/utilities/tv-phone-internet@3x.png"
+            },
+            "filled_color_dark": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_dark/utilities/tv-phone-internet@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_dark/utilities/tv-phone-internet@3x.png"
+            }
+          },
+          "colors": {
+            "light": "#c8e8f1",
+            "dark": "#84cce0"
+          }
+        },
+        {
+          "id": 7,
+          "name": "Water",
+          "icon": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square/utilities/water.png",
+          "icon_types": {
+            "slim": {
+              "small": "https://s3.amazonaws.com/splitwise/uploads/category/icon/slim/utilities/water.png",
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/slim/utilities/water@2x.png"
+            },
+            "square": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/utilities/water@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/square_v2/utilities/water@3x.png"
+            },
+            "transparent": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/transparent/utilities/water@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/transparent/utilities/water@3x.png"
+            },
+            "outline_light": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_light/utilities/water@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_light/utilities/water@3x.png"
+            },
+            "outline_dark": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_dark/utilities/water@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/outline_dark/utilities/water@3x.png"
+            },
+            "filled_color_light": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_light/utilities/water@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_light/utilities/water@3x.png"
+            },
+            "filled_color_dark": {
+              "large": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_dark/utilities/water@2x.png",
+              "xlarge": "https://s3.amazonaws.com/splitwise/uploads/category/icon/filled_color_dark/utilities/water@3x.png"
+            }
+          },
+          "colors": {
+            "light": "#c8e8f1",
+            "dark": "#84cce0"
+          }
+        }
+      ]
+    }
+  ]
+}

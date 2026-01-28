@@ -6,7 +6,7 @@ using Splitwise.Responses.Category;
 
 namespace Splitwise.Clients
 {
-    public class CategoryClient : ICategoryClient
+    internal class CategoryClient : ICategoryClient
     {
         private readonly IRestClient _restClient;
 

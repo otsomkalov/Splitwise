@@ -44,20 +44,14 @@ namespace Splitwise.Clients
 
             var response = await _restClient.PostAsync<UpdateUserResponse>(restRequest);
 
-            if (response.Errors is not JsonNode jObject)
+            if (response.Errors == null)
             {
                 return Result.Ok(response.User);
             }
 
-            if (jObject["base"] is JsonArray jArray)
+            if (response.Errors.Base.Count != 0)
             {
-                var errors = jArray.GetValues<string>();
-
-                var result = new Result();
-
-                result.WithErrors(errors);
-
-                return result;
+                return new Result().WithErrors(response.Errors.Base);
             }
 
             return Result.Fail("Unknown error happened");

@@ -20,4 +20,8 @@
     <PackageReference Include="RestSharp" Version="113.1.0"/>
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Splitwise.Tests.Unit"/>
+  </ItemGroup>
+
 </Project>

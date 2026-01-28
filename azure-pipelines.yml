@@ -20,6 +20,8 @@ steps:
     displayName: "Run tests"
     inputs:
       command: 'test'
+      projects: 'tests/Splitwise.Tests.Unit/Splitwise.Tests.Unit.csproj'
+      arguments: '-r $(Runtime) --configuration $(BuildConfiguration) --collect:"XPlat Code Coverage"'
   - task: DotNetCoreCLI@2
     displayName: "Pack project into NuGet package"
     inputs:
