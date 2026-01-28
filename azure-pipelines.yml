@@ -5,7 +5,7 @@ pr:
   - main
 
 pool:
-  vmImage: windows-2022
+  vmImage: ubuntu-latest
 
 variables:
   Configuration: 'Release'
@@ -21,14 +21,14 @@ steps:
     inputs:
       command: 'test'
       projects: 'tests/Splitwise.Tests.Unit/Splitwise.Tests.Unit.csproj'
-      arguments: '-r $(Runtime) --configuration $(BuildConfiguration) --collect:"XPlat Code Coverage"'
+      arguments: '-c $(Configuration) --collect:"XPlat Code Coverage"'
   - task: DotNetCoreCLI@2
     displayName: "Pack project into NuGet package"
     inputs:
       command: 'pack'
       packagesToPack: '**/Splitwise.csproj'
       versioningScheme: 'off'
-      arguments: '-o $(Build.ArtifactStagingDirectory)'
+      arguments: '-c $(Configuration) -o $(Build.ArtifactStagingDirectory)'
   - task: PublishPipelineArtifact@1
     displayName: "Publish artifacts"
     inputs:
