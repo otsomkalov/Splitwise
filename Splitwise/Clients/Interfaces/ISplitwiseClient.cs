@@ -6,6 +6,8 @@ namespace Splitwise.Clients.Interfaces
 
         IFriendClient Friend { get; }
 
+        IGroupClient Group { get; }
+
         IExpenseClient Expense { get; }
     }
 }

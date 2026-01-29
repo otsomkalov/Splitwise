@@ -14,7 +14,7 @@ namespace Splitwise.Options
             NumberHandling = JsonNumberHandling.AllowReadingFromString,
             Converters =
             {
-                new JsonStringEnumConverter<RepeatInterval>(JsonNamingPolicy.CamelCase),
+                new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
                 new DecimalToStringConverter()
             }
         };
