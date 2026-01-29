@@ -1,0 +1,52 @@
+{
+  "friends": [
+    {
+      "id": 56856793,
+      "first_name": "Bob",
+      "last_name": null,
+      "email": "xewib49563@otodir.com",
+      "registration_status": "confirmed",
+      "picture": {
+        "small": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby1-50px.png",
+        "medium": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby1-100px.png",
+        "large": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby1-200px.png"
+      },
+      "custom_picture": false,
+      "balance": [
+        {
+          "currency_code": "UAH",
+          "amount": "342.5"
+        },
+        {
+          "currency_code": "USD",
+          "amount": "-5.5"
+        }
+      ],
+      "groups": [
+        {
+          "group_id": 0,
+          "balance": [
+            {
+              "currency_code": "UAH",
+              "amount": "233.0"
+            },
+            {
+              "currency_code": "USD",
+              "amount": "-5.5"
+            }
+          ]
+        },
+        {
+          "group_id": 37454049,
+          "balance": [
+            {
+              "currency_code": "UAH",
+              "amount": "109.5"
+            }
+          ]
+        }
+      ],
+      "updated_at": "2026-01-27T19:25:43Z"
+    }
+  ]
+}

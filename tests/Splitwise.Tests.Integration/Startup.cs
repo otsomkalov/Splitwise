@@ -4,9 +4,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Splitwise.Clients;
 using Splitwise.Clients.Interfaces;
-using Splitwise.Tests.Settings;
+using Splitwise.Tests.Integration.Settings;
 
-namespace Splitwise.Tests;
+namespace Splitwise.Tests.Integration;
 
 public class Startup
 {

@@ -5,47 +5,32 @@ pr:
   - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: ubuntu-latest
 
 variables:
-  revision: $[counter(variables['minor'], 1)] # This will get reset every time minor gets bumped.
-  version: '$(major).$(minor).$(revision)'
   Configuration: 'Release'
 
 steps:
-  - task: UseDotNet@2
-    inputs:
-      version: '10.x'
-  - task: DotNetCoreCLI@2
-    name: Restore
-    inputs:
-      command: 'restore'
-      projects: 'Splitwise/*.csproj'
   - task: DotNetCoreCLI@2
     displayName: "Build project"
     inputs:
       command: 'build'
-      projects: 'Splitwise/*.csproj'
       arguments: '-c $(Configuration)'
-  - task: DotNetCoreCLI@2
-    displayName: 'Run all tests'
-    inputs:
-      command: 'test'
-      projects: 'Splitwise.Tests/**.csproj'
-      arguments: '-r $(Runtime) --configuration $(Configuration) --collect:"XPlat Code Coverage"'
   - task: DotNetCoreCLI@2
     displayName: "Run tests"
     inputs:
       command: 'test'
+      projects: 'tests/Splitwise.Tests.Unit/Splitwise.Tests.Unit.csproj'
+      arguments: '-c $(Configuration) --collect:"XPlat Code Coverage"'
   - task: DotNetCoreCLI@2
-    name: Pack
+    displayName: "Pack project into NuGet package"
     inputs:
       command: 'pack'
       packagesToPack: '**/Splitwise.csproj'
-      nobuild: true
-      versionEnvVar: 'version'
-      versioningScheme: 'byEnvVar'
+      versioningScheme: 'off'
+      arguments: '-c $(Configuration) -o $(Build.ArtifactStagingDirectory)'
   - task: PublishPipelineArtifact@1
-    name: Publish
+    displayName: "Publish artifacts"
     inputs:
       targetPath: '$(Build.ArtifactStagingDirectory)'
+      artifactName: 'lib'

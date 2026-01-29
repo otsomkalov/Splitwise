@@ -1,0 +1,15 @@
+﻿###
+GET https://secure.splitwise.com/api/v3.0/get_current_user
+Authorization: Bearer {{access_token}}
+
+###
+GET https://secure.splitwise.com/api/v3.0/get_user/{{user_id}}
+Authorization: Bearer {{access_token}}
+
+###
+POST https://secure.splitwise.com/api/v3.0/update_user/{{user_id}}
+Authorization: Bearer {{access_token}}
+
+{
+   "first_name": "Eve"
+}

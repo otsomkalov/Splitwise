@@ -1,0 +1,15 @@
+{
+  "user": {
+    "id": 56856793,
+    "first_name": "Bob",
+    "last_name": "Johnson",
+    "picture": {
+      "small": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby1-50px.png",
+      "medium": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby1-100px.png",
+      "large": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby1-200px.png"
+    },
+    "custom_picture": false,
+    "email": "xewib49563@otodir.com",
+    "registration_status": "confirmed"
+  }
+}

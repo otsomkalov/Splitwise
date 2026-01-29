@@ -1,16 +1,21 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Splitwise.Converters;
+using Splitwise.Requests.Expense;
 
 namespace Splitwise.Options
 {
     public static class JsonOptions
     {
-        public static readonly JsonSerializerSettings JsonSerializerSettings = new()
+        public static readonly JsonSerializerOptions JsonSerializerSettings = new ()
         {
-            NullValueHandling = NullValueHandling.Ignore,
-            ContractResolver = new DefaultContractResolver
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+            NumberHandling = JsonNumberHandling.AllowReadingFromString,
+            Converters =
             {
-                NamingStrategy = new SnakeCaseNamingStrategy()
+                new JsonStringEnumConverter<RepeatInterval>(JsonNamingPolicy.CamelCase),
+                new DecimalToStringConverter()
             }
         };
     }

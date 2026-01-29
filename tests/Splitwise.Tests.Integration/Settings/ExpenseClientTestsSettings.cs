@@ -1,4 +1,4 @@
-namespace Splitwise.Tests.Settings;
+﻿namespace Splitwise.Tests.Integration.Settings;
 
 public class ExpenseClientTestsSettings
 {

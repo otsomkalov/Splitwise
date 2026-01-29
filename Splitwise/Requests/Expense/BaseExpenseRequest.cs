@@ -1,13 +1,7 @@
-using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
-using Splitwise.Converters;
+﻿using System;
 
 namespace Splitwise.Requests.Expense
 {
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
     public abstract class BaseExpenseRequest
     {
         protected BaseExpenseRequest(decimal cost, string description, string currencyCode)
@@ -17,7 +11,6 @@ namespace Splitwise.Requests.Expense
             CurrencyCode = currencyCode;
         }
 
-        [JsonConverter(typeof(NumberToStringConverter))]
         public decimal Cost { get; }
 
         public int GroupId { get; protected init; }
@@ -31,7 +24,6 @@ namespace Splitwise.Requests.Expense
         /// </summary>
         public DateTime? Date { get; init; }
 
-        [JsonConverter(typeof(StringEnumConverter), typeof(CamelCaseNamingStrategy))]
         public RepeatInterval RepeatInterval { get; init; }
 
         public string CurrencyCode { get; }

@@ -1,7 +1,6 @@
-using System.Collections.Generic;
+﻿using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using FluentResults;
-using Newtonsoft.Json.Linq;
 using RestSharp;
 using Splitwise.Clients.Interfaces;
 using Splitwise.Requests.User;
@@ -45,20 +44,14 @@ namespace Splitwise.Clients
 
             var response = await _restClient.PostAsync<UpdateUserResponse>(restRequest);
 
-            if (response.Errors is not JObject jObject)
+            if (response.Errors == null)
             {
                 return Result.Ok(response.User);
             }
 
-            if (jObject["base"] is JArray jArray)
+            if (response.Errors.Base.Count != 0)
             {
-                var errors = jArray.ToObject<IEnumerable<string>>();
-
-                var result = new Result();
-
-                result.WithErrors(errors);
-
-                return result;
+                return new Result().WithErrors(response.Errors.Base);
             }
 
             return Result.Fail("Unknown error happened");

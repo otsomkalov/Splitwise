@@ -1,9 +1,8 @@
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Splitwise.Requests.Expense;
 
-[JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
 public abstract class BaseSharesSplitExpenseRequest : BaseExpenseRequest
 {
     protected BaseSharesSplitExpenseRequest(decimal cost, string description, string currencyCode, IEnumerable<BasePaymentRequest> payments)

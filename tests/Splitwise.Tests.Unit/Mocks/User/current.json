@@ -1,0 +1,33 @@
+{
+  "user": {
+    "id": 56856765,
+    "first_name": "Alice",
+    "last_name": "Smith",
+    "picture": {
+      "small": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby20-50px.png",
+      "medium": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby20-100px.png",
+      "large": "https://s3.amazonaws.com/splitwise/uploads/user/default_avatars/avatar-ruby20-200px.png"
+    },
+    "custom_picture": false,
+    "email": "gjjtkksqqoeqtaisgn@nvhrw.com",
+    "registration_status": "confirmed",
+    "force_refresh_at": null,
+    "locale": "en",
+    "country_code": "UA",
+    "date_format": "MM/DD/YYYY",
+    "default_currency": "USD",
+    "default_group_id": -1,
+    "notifications_read": "2022-08-27T23:04:10Z",
+    "notifications_count": 0,
+    "notifications": {
+      "added_as_friend": true,
+      "added_to_group": true,
+      "expense_added": true,
+      "expense_updated": true,
+      "bills": true,
+      "payments": true,
+      "monthly_summary": true,
+      "announcements": true
+    }
+  }
+}
