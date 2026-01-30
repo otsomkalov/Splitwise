@@ -5,7 +5,7 @@ using Splitwise.Requests.Expense;
 
 namespace Splitwise.Options
 {
-    public static class JsonOptions
+    internal static class JsonOptions
     {
         public static readonly JsonSerializerOptions JsonSerializerSettings = new ()
         {

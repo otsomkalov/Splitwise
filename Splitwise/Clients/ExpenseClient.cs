@@ -1,15 +1,14 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
-using System.Reflection;
 using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using FluentResults;
 using RestSharp;
 using Splitwise.Clients.Interfaces;
 using Splitwise.Errors;
-using Splitwise.Extensions;
 using Splitwise.Options;
 using Splitwise.Requests.Expense;
 using Splitwise.Responses.Expense;
@@ -19,6 +18,15 @@ namespace Splitwise.Clients
 {
     internal class ExpenseClient : IExpenseClient
     {
+        private const string PaidFieldFormat = "users__{0}__paid_share";
+        private const string OwedFieldFormat = "users__{0}__owed_share";
+
+        private const string ExistingUserIdFieldFormat = "users__{0}__user_id";
+
+        private const string NewUserFirstNameFieldFormat = "users__{0}__first_name";
+        private const string NewUserLastNameFieldFormat = "users__{0}__last_name";
+        private const string NewUserEmailFieldFormat = "users__{0}__email";
+
         private readonly IRestClient _restClient;
 
         public ExpenseClient(IRestClient restClient)
@@ -131,7 +139,7 @@ namespace Splitwise.Clients
                 return result;
             }
 
-            return Result.Ok(response.Data.Expense as FullExpense);
+            return Result.Ok<FullExpense>(response.Data.Expense);
         }
 
         public async Task<Result<Expense>> UpdateAsync(long id, UpdateSharesSplitExpenseRequest request)
@@ -199,9 +207,9 @@ namespace Splitwise.Clients
             return result;
         }
 
-        private static async Task<Result<Dictionary<string, object>>> GetUpsertRequestBodyAsync(BaseSharesSplitExpenseRequest request)
+        private static async Task<Result<JsonNode>> GetUpsertRequestBodyAsync(BaseSharesSplitExpenseRequest request)
         {
-            var result = new Result<Dictionary<string, object>>();
+            var result = new Result<JsonNode>();
 
             var validator = new BaseExpenseRequestValidator();
             var validationResult = await validator.ValidateAsync(request);
@@ -216,9 +224,7 @@ namespace Splitwise.Clients
                 return result;
             }
 
-            var requestBody = JsonSerializer.Deserialize<Dictionary<string, object>>(
-                JsonSerializer.Serialize(request, JsonOptions.JsonSerializerSettings),
-                JsonOptions.JsonSerializerSettings);
+            var requestBody = JsonSerializer.SerializeToNode(request, JsonOptions.JsonSerializerSettings)!;
 
             var paymentsRequests = request.Payments.ToArray();
 
@@ -226,14 +232,28 @@ namespace Splitwise.Clients
             {
                 var payment = paymentsRequests[i];
 
+                var paidFieldName = string.Format(PaidFieldFormat, i);
+                var owedFieldName = string.Format(OwedFieldFormat, i);
+
+                requestBody[paidFieldName] = payment.PaidShare.ToString(CultureInfo.InvariantCulture);
+                requestBody[owedFieldName] = payment.OwedShare.ToString(CultureInfo.InvariantCulture);
+
                 if (payment is ExistingUserPayment existingUserPayment)
                 {
-                    requestBody.Add(GetPaymentRequestBody(existingUserPayment, i));
+                    var userIdPropName = string.Format(ExistingUserIdFieldFormat, i);
+
+                    requestBody[userIdPropName] = existingUserPayment.UserId;
                 }
 
                 if (payment is NewUserPayment newUserPayment)
                 {
-                    requestBody.Add(GetPaymentRequestBody(newUserPayment, i));
+                    var firstNamePropName = string.Format(NewUserFirstNameFieldFormat, i);
+                    var lastNamePropName = string.Format(NewUserLastNameFieldFormat, i);
+                    var emailPropName = string.Format(NewUserEmailFieldFormat, i);
+
+                    requestBody[firstNamePropName] = newUserPayment.FirstName;
+                    requestBody[lastNamePropName] = newUserPayment.LastName;
+                    requestBody[emailPropName] = newUserPayment.Email;
                 }
             }
 
@@ -258,30 +278,6 @@ namespace Splitwise.Clients
             }
 
             return Result.Ok();
-        }
-
-        private static IDictionary<string, object> GetPaymentRequestBody<T>(T payment, int paymentIndex)
-        {
-            var requestBody = new Dictionary<string, object>();
-
-            foreach (var property in typeof(T).GetProperties())
-            {
-                var jsonPropertyAttribute = property.GetCustomAttribute<JsonPropertyNameAttribute>();
-
-                if (jsonPropertyAttribute == null || string.IsNullOrEmpty(jsonPropertyAttribute.Name))
-                {
-                    continue;
-                }
-
-                var propertyValue = property.GetValue(payment);
-
-                if (propertyValue != null)
-                {
-                    requestBody.Add(string.Format(jsonPropertyAttribute.Name, paymentIndex), propertyValue.ToString());
-                }
-            }
-
-            return requestBody;
         }
     }
 }
