@@ -7,10 +7,8 @@ namespace Splitwise.Requests.Expense
     /// </summary>
     public abstract class BasePaymentRequest
     {
-        [JsonPropertyName("users__{0}__paid_share")]
         public decimal PaidShare { get; init; }
 
-        [JsonPropertyName("users__{0}__owed_share")]
         public decimal OwedShare { get; init; }
     }
 }
