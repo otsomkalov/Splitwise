@@ -5,3 +5,19 @@ Authorization: Bearer {{access_token}}
 ###
 GET https://secure.splitwise.com/api/v3.0/get_expense/{{expense_id}}
 Authorization: Bearer {{access_token}}
+
+###
+POST https://secure.splitwise.com/api/v3.0/create_expense
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "description": "Dinner with friends",
+  "cost": "25",
+  "users__0__paid_share": "25",
+  "users__0__owed_share": "0",
+  "users__0__user_id": 56856793,
+  "users__1__paid_share": "0",
+  "users__1__owed_share": "25",
+  "users__1__user_id": 56856765
+}
