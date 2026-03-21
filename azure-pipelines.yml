@@ -16,13 +16,13 @@ steps:
     name: Restore
     inputs:
       command: 'restore'
-      projects: '**/Splitwise.csproj'
+      projects: '.'
       arguments: '-c Release'
   - task: DotNetCoreCLI@2
     displayName: "Build project"
     inputs:
       command: 'build'
-      projects: '**/Splitwise.csproj'
+      projects: '.'
       arguments: '-c Release'
   - task: DotNetCoreCLI@2
     displayName: "Run tests"
