@@ -1,0 +1,9 @@
+﻿{
+  "groups": [
+    {
+      "id": 123,
+      "name": "Test Group",
+      "group_type": "trip"
+    }
+  ]
+}

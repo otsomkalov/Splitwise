@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Splitwise\Splitwise.csproj"/>
+    <ProjectReference Include="..\..\src\Splitwise\Splitwise.csproj"/>
   </ItemGroup>
 
   <ItemGroup>

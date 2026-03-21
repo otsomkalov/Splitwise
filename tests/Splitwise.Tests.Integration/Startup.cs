@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -10,9 +10,11 @@ namespace Splitwise.Tests.Integration;
 
 public class Startup
 {
-    public void ConfigureHost(IHostBuilder hostBuilder) =>
+    public void ConfigureHost(IHostBuilder hostBuilder)
+    {
         hostBuilder
             .ConfigureAppConfiguration(ConfigureConfiguration);
+    }
 
     private void ConfigureConfiguration(HostBuilderContext context, IConfigurationBuilder builder)
     {

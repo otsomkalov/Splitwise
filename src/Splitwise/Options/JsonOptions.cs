@@ -1,0 +1,21 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Splitwise.Converters;
+
+namespace Splitwise.Options
+{
+    internal static class JsonOptions
+    {
+        public static readonly JsonSerializerOptions JsonSerializerSettings = new ()
+        {
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+            NumberHandling = JsonNumberHandling.AllowReadingFromString,
+            Converters =
+            {
+                new JsonStringEnumConverter(JsonNamingPolicy.CamelCase),
+                new DecimalToStringConverter()
+            }
+        };
+    }
+}
