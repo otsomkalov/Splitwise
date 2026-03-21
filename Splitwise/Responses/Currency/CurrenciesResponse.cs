@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Splitwise.Responses.Shared;
 
 namespace Splitwise.Responses.Currency
 {

@@ -1,7 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Splitwise.Converters;
-using Splitwise.Requests.Expense;
 
 namespace Splitwise.Options
 {

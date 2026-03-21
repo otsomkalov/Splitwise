@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Splitwise.Requests.Expense
+﻿namespace Splitwise.Requests.Expense
 {
     /// <summary>
     /// Represents base payment. Use PaymentFromExistingUser and PaymentFromNewUser classes

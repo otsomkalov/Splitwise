@@ -1,12 +1,9 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
-using RestSharp;
+﻿using RestSharp;
 using RestSharp.Serializers.Json;
 using RichardSzalay.MockHttp;
 using Splitwise.Clients;
 using Splitwise.Options;
 using Splitwise.Requests.Group;
-using Xunit;
 
 namespace Splitwise.Tests.Unit.Clients;
 
@@ -20,7 +17,7 @@ public class GroupClientTests
         // Arrange
         var messageHandler = new MockHttpMessageHandler();
 
-        await using var responseContent = System.IO.File.OpenRead("Mocks/Group/list.json");
+        await using var responseContent = File.OpenRead("Mocks/Group/list.json");
 
         var request = messageHandler.When(HttpMethod.Get, $"{BaseUrl}/get_groups")
             .Respond("application/json", responseContent);
@@ -48,7 +45,7 @@ public class GroupClientTests
         // Arrange
         var messageHandler = new MockHttpMessageHandler();
 
-        await using var responseContent = System.IO.File.OpenRead("Mocks/Group/details.json");
+        await using var responseContent = File.OpenRead("Mocks/Group/details.json");
 
         var request = messageHandler.When(HttpMethod.Get, $"{BaseUrl}/get_group/123")
             .Respond("application/json", responseContent);
@@ -75,7 +72,7 @@ public class GroupClientTests
         // Arrange
         var messageHandler = new MockHttpMessageHandler();
 
-        await using var responseContent = System.IO.File.OpenRead("Mocks/Group/details.json");
+        await using var responseContent = File.OpenRead("Mocks/Group/details.json");
 
         var request = messageHandler.When(HttpMethod.Post, $"{BaseUrl}/create_group")
             .Respond("application/json", responseContent);
@@ -111,5 +108,250 @@ public class GroupClientTests
         // Assert
         Assert.True(result.IsFailed);
         Assert.Contains(result.Errors, e => e.Message == "'Name' must not be empty.");
+    }
+
+    [Fact]
+    public async Task DeleteAsync_ReturnsTrue_OnSuccessfulRequest()
+    {
+        // Arrange
+        var messageHandler = new MockHttpMessageHandler();
+
+        await using var responseContent = File.OpenRead("Mocks/Group/delete_success.json");
+
+        var request = messageHandler.When(HttpMethod.Post, $"{BaseUrl}/delete_group/123")
+            .Respond("application/json", responseContent);
+
+        var restClient = new RestClient(messageHandler,
+            configureSerialization: config => config.UseSystemTextJson(JsonOptions.JsonSerializerSettings),
+            configureRestClient: options => options.BaseUrl = new(BaseUrl));
+
+        var client = new GroupClient(restClient);
+
+        // Act
+        var result = await client.DeleteAsync(123);
+
+        // Assert
+        Assert.Equal(1, messageHandler.GetMatchCount(request));
+        Assert.True(result.IsSuccess);
+        Assert.True(result.Value);
+    }
+
+    [Fact]
+    public async Task DeleteAsync_ReturnsFailure_OnError()
+    {
+        // Arrange
+        var messageHandler = new MockHttpMessageHandler();
+
+        await using var responseContent = File.OpenRead("Mocks/Group/delete_error.json");
+
+        var request = messageHandler.When(HttpMethod.Post, $"{BaseUrl}/delete_group/123")
+            .Respond("application/json", responseContent);
+
+        var restClient = new RestClient(messageHandler,
+            configureSerialization: config => config.UseSystemTextJson(JsonOptions.JsonSerializerSettings),
+            configureRestClient: options => options.BaseUrl = new(BaseUrl));
+
+        var client = new GroupClient(restClient);
+
+        // Act
+        var result = await client.DeleteAsync(123);
+
+        // Assert
+        Assert.Equal(1, messageHandler.GetMatchCount(request));
+        Assert.True(result.IsFailed);
+        Assert.Contains(result.Errors, e => e.Message == "Not found");
+    }
+
+    [Fact]
+    public async Task RestoreAsync_ReturnsTrue_OnSuccessfulRequest()
+    {
+        // Arrange
+        var messageHandler = new MockHttpMessageHandler();
+
+        await using var responseContent = File.OpenRead("Mocks/Group/restore_success.json");
+
+        var request = messageHandler.When(HttpMethod.Post, $"{BaseUrl}/undelete_group/123")
+            .Respond("application/json", responseContent);
+
+        var restClient = new RestClient(messageHandler,
+            configureSerialization: config => config.UseSystemTextJson(JsonOptions.JsonSerializerSettings),
+            configureRestClient: options => options.BaseUrl = new(BaseUrl));
+
+        var client = new GroupClient(restClient);
+
+        // Act
+        var result = await client.RestoreAsync(123);
+
+        // Assert
+        Assert.Equal(1, messageHandler.GetMatchCount(request));
+        Assert.True(result.IsSuccess);
+        Assert.True(result.Value);
+    }
+
+    [Fact]
+    public async Task RestoreAsync_ReturnsFailure_OnError()
+    {
+        // Arrange
+        var messageHandler = new MockHttpMessageHandler();
+
+        await using var responseContent = File.OpenRead("Mocks/Group/restore_error.json");
+
+        var request = messageHandler.When(HttpMethod.Post, $"{BaseUrl}/undelete_group/123")
+            .Respond("application/json", responseContent);
+
+        var restClient = new RestClient(messageHandler,
+            configureSerialization: config => config.UseSystemTextJson(JsonOptions.JsonSerializerSettings),
+            configureRestClient: options => options.BaseUrl = new(BaseUrl));
+
+        var client = new GroupClient(restClient);
+
+        // Act
+        var result = await client.RestoreAsync(123);
+
+        // Assert
+        Assert.Equal(1, messageHandler.GetMatchCount(request));
+        Assert.True(result.IsFailed);
+        Assert.Contains(result.Errors, e => e.Message == "Not found");
+    }
+
+    [Fact]
+    public async Task RemoveUserAsync_ReturnsTrue_OnSuccessfulRequest()
+    {
+        // Arrange
+        var messageHandler = new MockHttpMessageHandler();
+
+        await using var responseContent = System.IO.File.OpenRead("Mocks/Group/remove_user_success.json");
+
+        var request = messageHandler.When(HttpMethod.Post, $"{BaseUrl}/remove_user_from_group")
+            .Respond("application/json", responseContent);
+
+        var restClient = new RestClient(messageHandler,
+            configureSerialization: config => config.UseSystemTextJson(JsonOptions.JsonSerializerSettings),
+            configureRestClient: options => options.BaseUrl = new(BaseUrl));
+
+        var client = new GroupClient(restClient);
+        var removeUserRequest = new RemoveUserFromGroupRequest { GroupId = 123, UserId = 456 };
+
+        // Act
+        var result = await client.RemoveUserAsync(removeUserRequest);
+
+        // Assert
+        Assert.Equal(1, messageHandler.GetMatchCount(request));
+        Assert.True(result.IsSuccess);
+        Assert.True(result.Value);
+    }
+
+    [Fact]
+    public async Task RemoveUserAsync_ReturnsFailure_OnError()
+    {
+        // Arrange
+        var messageHandler = new MockHttpMessageHandler();
+
+        await using var responseContent = System.IO.File.OpenRead("Mocks/Group/remove_user_error.json");
+
+        var request = messageHandler.When(HttpMethod.Post, $"{BaseUrl}/remove_user_from_group")
+            .Respond("application/json", responseContent);
+
+        var restClient = new RestClient(messageHandler,
+            configureSerialization: config => config.UseSystemTextJson(JsonOptions.JsonSerializerSettings),
+            configureRestClient: options => options.BaseUrl = new(BaseUrl));
+
+        var client = new GroupClient(restClient);
+        var removeUserRequest = new RemoveUserFromGroupRequest { GroupId = 123, UserId = 456 };
+
+        // Act
+        var result = await client.RemoveUserAsync(removeUserRequest);
+
+        // Assert
+        Assert.Equal(1, messageHandler.GetMatchCount(request));
+        Assert.True(result.IsFailed);
+        Assert.Contains(result.Errors, e => e.Message == "User not found");
+    }
+
+    [Fact]
+    public async Task AddUserAsync_ReturnsTrue_OnSuccessfulRequest()
+    {
+        // Arrange
+        var messageHandler = new MockHttpMessageHandler();
+
+        await using var responseContent = System.IO.File.OpenRead("Mocks/Group/add_user_success.json");
+
+        var request = messageHandler.When(HttpMethod.Post, $"{BaseUrl}/add_user_to_group")
+            .Respond("application/json", responseContent);
+
+        var restClient = new RestClient(messageHandler,
+            configureSerialization: config => config.UseSystemTextJson(JsonOptions.JsonSerializerSettings),
+            configureRestClient: options => options.BaseUrl = new(BaseUrl));
+
+        var client = new GroupClient(restClient);
+        var addUserRequest = new AddKnownUserToGroupRequest { GroupId = 123, UserId = 456 };
+
+        // Act
+        var result = await client.AddUserAsync(addUserRequest);
+
+        // Assert
+        Assert.Equal(1, messageHandler.GetMatchCount(request));
+        Assert.True(result.IsSuccess);
+        Assert.True(result.Value);
+    }
+
+    [Fact]
+    public async Task AddUserAsync_ReturnsFailure_OnError()
+    {
+        // Arrange
+        var messageHandler = new MockHttpMessageHandler();
+
+        await using var responseContent = System.IO.File.OpenRead("Mocks/Group/add_user_error.json");
+
+        var request = messageHandler.When(HttpMethod.Post, $"{BaseUrl}/add_user_to_group")
+            .Respond("application/json", responseContent);
+
+        var restClient = new RestClient(messageHandler,
+            configureSerialization: config => config.UseSystemTextJson(JsonOptions.JsonSerializerSettings),
+            configureRestClient: options => options.BaseUrl = new(BaseUrl));
+
+        var client = new GroupClient(restClient);
+        var addUserRequest = new AddKnownUserToGroupRequest { GroupId = 123, UserId = 456 };
+
+        // Act
+        var result = await client.AddUserAsync(addUserRequest);
+
+        // Assert
+        Assert.Equal(1, messageHandler.GetMatchCount(request));
+        Assert.True(result.IsFailed);
+        Assert.Contains(result.Errors, e => e.Message == "User not found");
+    }
+
+    [Fact]
+    public async Task AddUserAsync_ReturnsTrue_OnSuccessfulRequest_WithNewUserRequest()
+    {
+        // Arrange
+        var messageHandler = new MockHttpMessageHandler();
+
+        await using var responseContent = System.IO.File.OpenRead("Mocks/Group/add_user_success.json");
+
+        var request = messageHandler.When(HttpMethod.Post, $"{BaseUrl}/add_user_to_group")
+            .Respond("application/json", responseContent);
+
+        var restClient = new RestClient(messageHandler,
+            configureSerialization: config => config.UseSystemTextJson(JsonOptions.JsonSerializerSettings),
+            configureRestClient: options => options.BaseUrl = new(BaseUrl));
+
+        var client = new GroupClient(restClient);
+        var addUserRequest = new AddNewUserToGroupRequest
+        {
+            GroupId = 123,
+            FirstName = "New",
+            LastName = "User",
+            Email = "new.user@example.com"
+        };
+
+        // Act
+        var result = await client.AddUserAsync(addUserRequest);
+
+        // Assert
+        Assert.Equal(1, messageHandler.GetMatchCount(request));
+        Assert.True(result.IsSuccess);
+        Assert.True(result.Value);
     }
 }

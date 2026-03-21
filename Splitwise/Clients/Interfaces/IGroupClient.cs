@@ -12,5 +12,13 @@ namespace Splitwise.Clients.Interfaces
         Task<Group> GetAsync(int id);
 
         Task<Result<Group>> CreateAsync(CreateGroupRequest request);
+
+        Task<Result<bool>> DeleteAsync(int id);
+
+        Task<Result<bool>> RestoreAsync(int id);
+
+        Task<Result<bool>> AddUserAsync(BaseAddUserToGroupRequest request);
+
+        Task<Result<bool>> RemoveUserAsync(RemoveUserFromGroupRequest request);
     }
 }

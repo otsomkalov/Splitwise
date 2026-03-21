@@ -1,5 +1,3 @@
-using System.Net.Http;
-using RestSharp;
 using Splitwise.Clients.Interfaces;
 
 namespace Splitwise.Clients
