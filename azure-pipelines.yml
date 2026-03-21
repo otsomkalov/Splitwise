@@ -4,8 +4,7 @@ trigger:
 pr:
   - main
 
-pool:
-  vmImage: ubuntu-latest
+pool: "self-hosted"
 
 variables:
   Configuration: 'Release'
