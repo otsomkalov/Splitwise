@@ -6,28 +6,32 @@ pr:
 
 pool: "self-hosted"
 
-variables:
-  Configuration: 'Release'
-
 steps:
+  - checkout: self
+    fetchDepth: 0
+  - task: DotNetCoreCLI@2
+    name: Restore
+    inputs:
+      command: 'restore'
+      arguments: '-c Release'
   - task: DotNetCoreCLI@2
     displayName: "Build project"
     inputs:
       command: 'build'
-      arguments: '-c $(Configuration)'
+      arguments: '-c Release'
   - task: DotNetCoreCLI@2
     displayName: "Run tests"
     inputs:
       command: 'test'
       projects: 'tests/Splitwise.Tests.Unit/Splitwise.Tests.Unit.csproj'
-      arguments: '-c $(Configuration) --collect:"XPlat Code Coverage"'
+      arguments: '-c Release --collect:"XPlat Code Coverage"'
   - task: DotNetCoreCLI@2
     displayName: "Pack project into NuGet package"
     inputs:
       command: 'pack'
       packagesToPack: '**/Splitwise.csproj'
       versioningScheme: 'off'
-      arguments: '-c $(Configuration) -o $(Build.ArtifactStagingDirectory)'
+      arguments: '-c Release -o $(Build.ArtifactStagingDirectory)'
   - task: PublishPipelineArtifact@1
     displayName: "Publish artifacts"
     inputs:

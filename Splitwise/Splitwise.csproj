@@ -4,14 +4,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>10</LangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Title>Splitwise</Title>
-    <Authors>Oleg Tsomkalov</Authors>
-    <Description>Wrapper for Splitwise API</Description>
-    <PackageProjectUrl>https://github.com/otsomkalov/Splitwise</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/otsomkalov/Splitwise</RepositoryUrl>
-    <RepositoryType>GitHub</RepositoryType>
-    <PackageVersion>0.0.13</PackageVersion>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>

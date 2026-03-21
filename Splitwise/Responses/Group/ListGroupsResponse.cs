@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 
-namespace Splitwise.Responses.Group
+namespace Splitwise.Responses.Group;
+
+public class ListGroupsResponse
 {
-    public class ListGroupsResponse
-    {
-        public IReadOnlyCollection<Group> Groups { get; init; }
-    }
+    public IReadOnlyCollection<Group> Groups { get; init; }
 }
