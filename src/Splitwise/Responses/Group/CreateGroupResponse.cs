@@ -1,4 +1,5 @@
-﻿namespace Splitwise.Responses.Group;
+namespace Splitwise.Responses.Group;
+
 public record CreateGroupResponse(
     Group Group,
     Errors Errors

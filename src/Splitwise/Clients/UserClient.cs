@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using FluentResults;
 using RestSharp;
 using Splitwise.Clients.Interfaces;
@@ -48,12 +48,7 @@ namespace Splitwise.Clients
                 return Result.Ok(response.User);
             }
 
-            if (response.Errors.Base.Count != 0)
-            {
-                return new Result().WithErrors(response.Errors.Base);
-            }
-
-            return Result.Fail("Unknown error happened");
+            return response.Errors.Base.Count != 0 ? (Result<FullUser>) new Result().WithErrors(response.Errors.Base) : (Result<FullUser>) Result.Fail("Unknown error happened");
         }
     }
 }

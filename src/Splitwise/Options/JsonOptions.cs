@@ -6,7 +6,7 @@ namespace Splitwise.Options
 {
     internal static class JsonOptions
     {
-        public static readonly JsonSerializerOptions JsonSerializerSettings = new ()
+        public static readonly JsonSerializerOptions JsonSerializerSettings = new()
         {
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
             PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
