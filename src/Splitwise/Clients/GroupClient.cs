@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using FluentResults;
 using RestSharp;
 using Splitwise.Clients.Interfaces;
@@ -75,12 +75,7 @@ public class GroupClient : IGroupClient
 
         var (success, errors) = await _restClient.PostAsync<DeleteGroupResponse>(restRequest);
 
-        if (errors != null)
-        {
-            return new Result<bool>().WithErrors(errors.Base);
-        }
-
-        return Result.Ok(success);
+        return errors != null ? new Result<bool>().WithErrors(errors.Base) : Result.Ok(success);
     }
 
     public async Task<Result<bool>> RestoreAsync(int id)
@@ -90,12 +85,7 @@ public class GroupClient : IGroupClient
 
         var (success, errors) = await _restClient.PostAsync<RestoreGroupResponse>(restRequest);
 
-        if (errors != null)
-        {
-            return new Result<bool>().WithErrors(errors);
-        }
-
-        return Result.Ok(success);
+        return errors != null ? new Result<bool>().WithErrors(errors) : Result.Ok(success);
     }
 
     public async Task<Result<bool>> AddUserAsync(BaseAddUserToGroupRequest request)
@@ -105,12 +95,7 @@ public class GroupClient : IGroupClient
 
         var (success, _, errors) = await _restClient.PostAsync<AddUserToGroupResponse>(restRequest);
 
-        if (errors != null)
-        {
-            return new Result<bool>().WithErrors(errors.Base);
-        }
-
-        return Result.Ok(success);
+        return errors != null ? new Result<bool>().WithErrors(errors.Base) : Result.Ok(success);
     }
 
     public async Task<Result<bool>> RemoveUserAsync(RemoveUserFromGroupRequest request)
@@ -120,11 +105,6 @@ public class GroupClient : IGroupClient
 
         var (success, errors) = await _restClient.PostAsync<RemoveUserFromGroupResponse>(restRequest);
 
-        if (errors != null)
-        {
-            return new Result<bool>().WithErrors(errors.Base);
-        }
-
-        return Result.Ok(success);
+        return errors != null ? new Result<bool>().WithErrors(errors.Base) : Result.Ok(success);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Splitwise.Requests.Group;
+namespace Splitwise.Requests.Group;
 
 public class CreateGroupRequest
 {

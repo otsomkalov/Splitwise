@@ -10,12 +10,9 @@ public class DecimalToStringConverter : JsonConverter<decimal>
     {
         var stringValue = reader.GetString();
 
-        if (decimal.TryParse(stringValue, out var value))
-        {
-            return value;
-        }
-
-        throw new JsonException($"Unable to convert \"{stringValue}\" to decimal.");
+        return decimal.TryParse(stringValue, out var value)
+            ? value
+            : throw new JsonException($"Unable to convert \"{stringValue}\" to decimal.");
     }
 
     public override void Write(Utf8JsonWriter writer, decimal value, JsonSerializerOptions options)

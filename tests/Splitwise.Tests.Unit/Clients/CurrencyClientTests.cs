@@ -1,4 +1,4 @@
-﻿using RestSharp;
+using RestSharp;
 using RestSharp.Serializers.Json;
 using RichardSzalay.MockHttp;
 using Splitwise.Clients;

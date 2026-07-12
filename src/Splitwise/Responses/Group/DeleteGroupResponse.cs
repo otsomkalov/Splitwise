@@ -1,4 +1,4 @@
-﻿namespace Splitwise.Responses.Group;
+namespace Splitwise.Responses.Group;
 
 public record DeleteGroupResponse(
     bool Success,
